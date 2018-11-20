@@ -29,12 +29,24 @@ Questions to answer:
  What makes a graph a simple graph? What attributes would make it not simple?
   A graph is a simple graph if it has no self loops or parallel edges - if it does have a self loop (a vertex with an edge pointing to itself) or
   parallel edges (multiple edges )
- What is the maximum number of edges in a directed simple graph? Undirected simple graph? Answer should be in terms of N
- Describe the levels of connectivity a graph can have (strongly connected, weakly connected).
- What are cycles?
- What are some naive ways we can store and traverse graphs? Be able to discuss time/space complexity of these approaches, and what issues we may face.
 
- 
+ What is the maximum number of edges in a directed simple graph? Undirected simple graph? Answer should be in terms of N
+  directed simple graph - n(n - 1)
+  undirected simple graph - n(n-1)/2
+ Describe the levels of connectivity a graph can have (strongly connected, weakly connected).
+  Strongly connected graphs - every vertex is connected to every other vertex
+  Weakly connected graphs - In a directed graph, connections exist between all vertices, but not necessarily connections that allow you to get from one
+  vertex to the other directly
+
+ What are cycles?
+  Walks that start and end on the same vertex
+
+ What are some naive ways we can store and traverse graphs? Be able to discuss time/space complexity of these approaches, and what issues we may face.
+  We could store graphs as two lists, a list of vertices and a list of edges, with the edge list containing start and end vertices as the object itself.
+  The space complexity is O(n^2) for the edge list and O(n) for the vertices list.  If you instead store the edges as pointers to the vertices, the space
+  complexity goes down to O(n) because you're storing references.  Traversal is still an issue - if you need to traverse adjacent elements, you have O(n)
+  time complexity because you're doing linear search.
+
 
  Graphs - type can be defined by what type of edge they have (directed, non directed)
  Graphs have no root node or restrictions on links/edges back and forth
