@@ -1,0 +1,24 @@
+Give a high level overview of what an object's prototype represents
+  An objects prototype represents the function that is called when you invoke new on an object (i.e., new Array() has a prototype of Array.prototype)
+
+ What are the differences between the __proto__ and prototype attributes?
+  __proto__ is a getter/setter for [[Prototype]].  Prototype is a property of an object.
+
+ What happens when we do or don't explicitly set an object's prototype?
+  If you explicitly set an object's prototype, the object.prototype is the function of that prototype...which can sometimes lose you the constructor
+  unless you manually define it.
+  When you do not set the prototype, the default is to point back to the constructor function (i.e., new Rabbit() has a prototype of Rabbit())
+
+ What is an object's default prototype?
+  The constructor function of the object
+
+ What are the valid values for an object's prototype?
+  An object or null - other values will not work
+
+Prototype - property of the constructor function
+When you do new F(), the new keyword sets the object's [[prototype]] to F.prototype.
+So if you have a Rabbit object, and set Rabbit.prototype to Animal, Rabbit objects will have prototype set to Animal
+Default prototype points back to the constructor function.  I.e., Rabbit.prototype = Rabbit
+You can access the constructor using an instance of the object - new rabbitobj.constructor will create a new Rabbit object
+...however, if you replace the default prototype, it will not carry the constructor with it.
+

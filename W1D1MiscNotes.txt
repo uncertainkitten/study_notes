@@ -1,0 +1,30 @@
+ Name 5 benefits of HTML5
+  Accessibility with semantic tags - it's easier to read with screen readers
+
+ What is localStorage? How might you use it?
+  A cross between cookies and a client-side db - it lets you use the browser as a storage space to persist state across sessions without relying on third
+  party storage tools on the client side.  You might use it to save an ongoing score in a clicker game.
+
+ Why are media queries useful?
+  They let you write CSS in a way that respects the screen size so that your elements render in a pleasing fashion
+
+ What is mobile-first design? Be as specific as possible.
+  Mobile first design is setting your basic structure to render well on a mobile screen - keeping elements within the first breakpoint, sizing them and
+  using space so that your design is light, fast, and fits well on page.  From there you add how the elements might expand into larger screens.
+
+ Benefits of HTML5
+ Accessibility - semantic tags, ARIA (W3C spec that assigns roles to semantic elements)
+ Video and Audio support - replaces Flash player/other third party players, simplifies embedding
+ Doctype - More simply defines the document as an HTML document rather than cluttering head
+ Cleaner code - Semantic tags again
+ Smarter storage - Localstorage - a cross between cookies and a client-side db.
+ Better interactions - Canvas, drag and drop, browser history management, doc editing, timed media playback
+ Game development - Canvas still, removes need for third party libraries like Flash
+ Legacy support - Older browsers can use it
+ Mobile - Viewport, full screen browsing, home screen icons
+ It's the future I guess
+
+ Media queries - allowing you to condition CSS on the size of the screen
+
+
+

@@ -1,0 +1,47 @@
+What are the three primary Fielding constraints? (Bonus if you can say who Fielding is!)
+  The three primary Fielding constraints (designed by Roy Fielding, in 2000) are: Client-Server, Stateless, and Uniform Interface
+
+What sub-constraints make up a Uniform Interface
+  The subconstraints that make up a Uniform Interface are Identification of Resources, Manipulation of resources through representations,
+  self-descriptive messages, and hypermedia
+
+Walk through an arbitrary example of a RESTful request/response cycle, and describe what makes it RESTful
+  Let's say I were going to Wordpress and wanted to make a blog post.  I'm going to make a GET request to get Wordpress's create post form - I
+  know that I am getting this page because the URI I am using identifies the resource I am getting.
+
+  Wordpress will serve me up the resource of the create post form - what it will serve up is data that is self descriptive - I don't need other documents
+  to tell my browser how to read the HTML - the doctype will be HTML and this will tell me browser how to interpret the code it is served - additionally,
+  the form will tell me what further requests I can make - in this case, a POST request can be made, as well as GET requests for various changes in the
+  editor such as styling or adding page breaks, etc.
+
+  Lastly, I'll send Wordpress the form through a post request - I'm not telling Wordpress line by line how to render my post.  I have manipulated a
+  representation of my post for the POST request, and Wordpress will interpret it and let me know if I succeeded and my post has been added, or if
+  my instructions were rejected.
+
+
+RESTful design
+Representational State Transfer
+REST Fielding constraints:
+Client-server: The network must be made up of clients and servers (a server has the resources, a client wants to interact with the resources)
+Stateless: Server and client do not keep track of each other's state
+Uniform Interface: Common language between servers and clients through:
+  Identification of resources, manipulation of resources through representations, self-descriptive messages, and hypermedia.
+
+  Ident of resources: Unique, stable identifiers for resources (Web: URI identifies resources with HTTP as its language)
+
+  Manipulation of resources through representations: Usually a JSON object containing content to be add/delete/modified - this is a representation
+  of what the client would like to have the resource be changed into, but the server is still in control of the resource and whether the resource changes
+  and how it changes.  In a REST world, posting a blog post has you send the server what you would like to see, and the server tells you whether it succeeds or not.
+  In a non-REST world, you might literally be telling the server what to do line by line (i.e, add line "This is the title" to HTML body)
+
+  Self-descriptive messages: Contains all information a recipient needs to understand it - no need for outside context/information/another document etc.
+
+  Hypermedia: Data sent to the client that tells the client what further requests it can make - links and image tags tell the client that it can make
+  further get requests.
+
+Other Fielding constraints:
+
+Caching - Server responses should be labelled as cacheable or non-cachable
+Layered Systems - Allows more components than just servers and clients - but each layer is constrained to only interact with the next layer
+Code on Demand - optional constraint, allows server to send executable code to client
+
