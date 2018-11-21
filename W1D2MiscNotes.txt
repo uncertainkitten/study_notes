@@ -1,0 +1,21 @@
+How do I CSS grid?
+
+Two components - wrapper and items (parent and children respectively)
+Give the parent - display: grid
+You can use the grid-template-column and grid-template-row properties to define the size of the columns and rows - each value you place is
+another column or row
+For each of these, you give a height (row) or width(column)
+For your children, you define the start column and end column (or start row and end row), i.e. 1, 4, will cover columens 1, 2, 3
+(with grid-column-start, grid-column-end).  You can also do grid-column: 1 / 4
+
+You can set an end to a number greater than a start value, it will wrap to the other side of the column/row line
+Set negative values to get at grid lines starting from the right (i.e. -2 is 2 lines from the right)
+You can define starts and ends with span, which will span that # of grid boxes
+You can use X / span Y and vice versa as well
+Grid area - uses start coordinates and end coordinates in X1 / Y1 / X2 / Y2 format
+
+You can use order to change the order of elements in the grid
+
+
+
+
