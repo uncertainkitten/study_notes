@@ -1,0 +1,28 @@
+Notes from The System Design Primer: https://github.com/donnemartin/system-design-primer
+
+Lecture on Scalability:
+Things to look for in a hosting company:
+Due diligence
+SFTP versus FTP (Secure, encrypted traffic - particularly for usernames and passwords due to wifi sniffers)
+You might want to avoid shared hosting if you're trying to run something that needs to scale
+VPS - Virtual Private Server, can rent for yourself - extremely fast/powerful machine chopped up into a bunch of virtual machines using
+HyperV or VMWare etc. - Your data is not protected from the webhost itself, of course.
+Shared Webhost - 
+Only real way to secure data from webhosts is running your own server.
+AWS EC2 - allows you to automate scaling by spinning up additional VMs at certain traffic thresholds
+
+Vertical scaling - Make your computer hardware better (add cores, add RAM, add HD space)
+
+Advantage of advances in processors/RAM/HDD size allows splitting hardware more and more efficiently
+SATA - usual HD these days - usually 7200 rpm
+SAS - Serial Attached SCSI - usually 10K to 15K rpm
+Parallel ETA - very old HD
+SSDs - no rpm - perform better electronically due to no moving parts
+
+Horizontal scaling: Distributing your systems using cheaper hardware rather than vertically scaling to the state of the art
+
+Challenges: How do you distribute HTTP requests from the client?  Load Balancers (i.e. NGINX)
+But how do you determine which server gets the request from the client?
+Find out when you resume from 16:24 on https://www.youtube.com/watch?v=-W9F__D3oY4
+
+
