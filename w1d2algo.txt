@@ -1,0 +1,51 @@
+ Give a high level overview of an Adjacency Matrix
+ -An adjacency matrix is a 2D array representing every possible edge for a set of vertices and providing either a Boolean (for unweighted graphs) or
+  value (for weighted graphs)
+
+ If we were only concerned about time complexity, is an Adjacency Matrix efficient? Why/why not?
+  -The adjacency matrix is time efficient on connection lookup and kind of efficient on adjacency lookup
+
+ If we were only concerned about space complexity, is an Adjacency Matrix efficient? Why/why not?
+  An adjacency matrix is very space inefficient, having a space complexity of O(v^2)
+
+ Give a high level overview of an Adjacency List
+  An adjacency list is a list of adjacent nodes as opposed to a list of all possible adjacent nodes.  The list can be expressed as an array, linked list,
+  binary search tree, or other data structure.  The advantage is that for sparse graphs, it takes up significantly less space.
+
+ What benefits do we get from an Adjacency List?
+  The space complexity is significantly lower if you bound the maximum number of adjacencies under the assumption that your graph is sparse.  Time
+  complexity is also reduced.  You do increase time complexity of connection look up to (up to) O(v), though with a sparse graph this will also be
+  significantly reduced in terms of actual time used.
+
+ Note: The other common operation is finding if two nodes are connected - both this and adjacency take a linear search through the entire list
+
+ Adjacency matrix - have a 2D array in which you have # of vertex arrays with # of vertex elements - then, any edge that exists is set to true 
+ in the matrix.  Else, it's false
+
+ For an undirected graph, you only need to go through half the adjacency matrix
+
+ this reduces the time complexity of finding adjacent nodes to O(n) where n is number of vertices (you just scan a given node's row)
+
+ To reduce time complexity of getting index of node in vertex list, you use a hash
+
+ For a weighted graph, instead of a Boolean, you can set the value as a weight of the edge, and empty edges can be a really impossibly high number.
+
+ The issue with adjacency matrices is that you are trading off space for time - your space complexity is O(n^2) - this is bad when you have a sparse
+ graph with a ton of vertices
+
+ finding whether nodes are connected is O(1) in an adjacency matrix
+
+ An adjacency list removes all unnecessary information - it is a list of all nodes to which a node is connected.  
+ This reduces the space complexity drastically for sparse graphs
+ You can use a binary search tree or a linked list instead of an array to store the connections
+ Space complexity of an adjacency list is O(e), and most real world graphs will not have an e that is equal to (v(v-1))
+ Time complexity of finding connections is O(v), however, as opposed to O(1) - you can reduce to O(log v) with binary tree search, but costs a lot of
+ time to keep sorted
+ Finding adjacency is O(v) - however, if you make assumptions about your graph, you can cap the complexity at much lower than v in adj list
+
+ Insert edge operation - adj matrix is O(1), adj list O(1) with linked lists
+ Del operation - adj matrix is O(1), adj list is O(n) with linked lists
+
+If you use an array of pointers to the heads of a series of linked lists, you can get better insert time
+
+

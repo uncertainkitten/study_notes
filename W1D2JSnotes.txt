@@ -1,0 +1,67 @@
+ What are the benefits of a Javascript closure?
+  The benefits of a JS closure are that you can pass variables from outside scopes into an inner function, and still have access to those variables
+  even when the outer function has returned, meaning you can encapsulate some data, protecting it from outside access out of context
+
+ Formally define a Javascript closure
+  I have no idea what this means.
+
+ Give an example of a closure
+  function sayHi(name){
+  var message = `Hi ${name}!`;
+  function greeting() {
+    console.log(message)
+  }
+  // The above three lines are the actual closure - they are the function called within the function to _close over_ the outside variables
+  return greeting
+}
+
+ What is data encapsulation?
+  Data encapsulation is the concept that some information should not be accessible from the outside of the function.
+
+ Closures:
+ A closure allows you to access variables from an enclosing scope - the environment that the closure is being called in,
+ even after leaving the scope in which it was declared
+
+ A closure can - refer to variables from the enclosing scope, even after the outer function has returned.  This allows for data encapsulation -
+ the closure doesn't directly expose the data it gets from the enclosing scope; when the outer function returns, the variable still exists, but is
+ ONLY reachable by the closure
+
+ In ex: 
+ ```const arr = [10, 12, 15, 21];
+for (var i = 0; i < arr.length; i++) {
+  setTimeout(function() {
+    console.log(`The value ${arr[i]} is at index: ${i}`);
+  }, (i+1) * 1000);
+}```
+
+This will return "The value undefined is at index 4", because the loop executes before the function is returned.  You can solve with 
+immediately invoked function execution:
+```
+
+const arr = [10, 12, 15, 21];
+for (var i = 0; i < arr.length; i++) {
+  (function(j) {
+    setTimeout(function() {
+      console.log(`The value ${arr[j]} is at index: ${j}`);
+    }, j * 1000);
+  })(i)
+}
+```
+
+This creates a function that stores the values within its inner scope.  You can also declare i with let, which has the same effect
+```
+const arr = [10, 12, 15, 21];
+for (let i = 0; i < arr.length; i++) {
+  setTimeout(function() {
+    console.log(`The value ${arr[i]} is at index: ${i}`);
+  }, (i) * 1000);
+}
+```
+
+An IIFE is a function expression that is called immediately after you define it. It is usually used when you want to create a new variable scope.
+
+The (surrounding parenthesis) prevents from treating it as a function declaration.
+
+The final parenthesis() are executing the function expression.
+
+This allows you to avoid global vars, create fresh scopes and fresh environments
