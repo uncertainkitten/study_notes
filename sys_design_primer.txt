@@ -23,6 +23,51 @@ Horizontal scaling: Distributing your systems using cheaper hardware rather than
 
 Challenges: How do you distribute HTTP requests from the client?  Load Balancers (i.e. NGINX)
 But how do you determine which server gets the request from the client?
-Find out when you resume from 16:24 on https://www.youtube.com/watch?v=-W9F__D3oY4
+
+You return the load balancer's IP address, and it determines which application tier machine will get hit.  This also means that you can have private IP
+addresses which means you need less IPv4 space
+
+Load balancer can decide which application tier machine handles requests based on how busy a given machine is, distributing work to the machines
+with the lightest loads
+
+Another way you could do it is by sharding your databases to handle certain requests, such as videos, images, etc.
+
+But a really simple way to do it is round robin - have the load balancer return an IP address based on which request it is (i.e. first, second, etc.)
+
+Drawbacks of round robin - A user might hit some servers harder than others, and if those requests end up in an odd distribution, some servers might be
+slower than others
+If you update information on one server, you might get time traveling information - it shows up in one place, but then you re-access and it doesn't show
+up on your next server.
+Additionally, caching can get you "stuck" to a server, so if you're making heavy requests, the server taking these requests is going to have much
+more traffic from you
+
+You can solve some of this by having your load balancer do the round robin:
+However, you might have issues with session saving - your session token might be on server one, but server 2 or 3 don't have your session and you end
+up on those servers instead at some point and are asked to log in again. Or other information might not be saved on all servers
+ - so you might be having problems with user experience of adding a thing to cart, then it goes away, and comes back, etc.
+
+ A way to solve it might be the database sharding - however, you lose redundancy that way
+
+ Another way is having the user get "stuck" to a server temporarily, by the load balancer.  You could also save session data in a machine
+ that is connected to all the other machines. Unfortunately, this gives you a single point of failure, again.
+
+ So, another solution is RAID - A thing RAID0 does is striping - it lets you write something to multiple disks, by having the writing follow concurrency
+ RAID1 does mirroring - it writes things to both disks simultaneously - this allows you to automatically back up everything
+ RAID10 - does striping and redundancy, but takes duplicate disks for all disks
+ RAID5 - lets you scale better, only has one redundancy disk
+ RAID6 - Has two redundancy disks
+
+ So you could ostensibly use these principles for distributed systems - unfortunately, this still doesn't deal with interruptions to the connections
+ between servers
+
+But, the most obvious way to solve this is to have _two_ systems acting as session storage
+Software:
+Amazon Elastic Load Balancers
+HAProxy
+LVS
+Hardware:
+Various companies charge a ton for load balancer machines
+
+Well, let's continue from 46:29 NEXT TIME: https://www.youtube.com/watch?v=-W9F__D3oY4
 
 
