@@ -1,0 +1,101 @@
+ What are the steps for DFS on a graph?
+ The steps for DFS are as follows
+ -Start from a node
+ -Check adjacent nodes - pick one based on label order
+ -Add the node to the stack, count it as visited, and check _that_ node's adjacencies
+ -Rinse and repeat - when a node has no unvisited adjacencies, pop it off the stack, check the next stack node's adjacencies
+ -When your stack is empty, you're done!
+
+ What supporting data structure might you use for BFS and DFS, respectively?
+ BFS uses a Queue as the supporting data structure
+ DFS uses a Stack as the supporting data structure
+
+ DFS uses a stack
+ i.e., if you have
+
+ B --- F
+ | \   | \
+ E  A  |  C
+  \ | \|  |
+    G  D  H
+
+Starting from A - we push it onto the stack
+Stack: [A]
+Visited: [A]
+
+Then look at stack, check adjacent to top nodes, visit first alphabetically/unvisited
+Stack: [A, B]
+Visited: [A, B]
+Stack: [A, B, E]
+Visited: [A, B, E]
+Stack: [A, B, E, G]
+Visited: [A, B, E, G]
+
+Then you pop off a thing off the stack if you have visited all adjacent vertices
+Pop G
+Stack: [A, B, E]
+Visited: [A, B, E, G]
+Pop E
+Stack: [A, B]
+Visited: [A, B, E, G]
+Stack: [A, B, F]
+Visited: [A, B, E, G, F]
+Stack: [A, B, F, C]
+Visited: [A, B, E, G, F, C]
+Stack: [A, B, F, C, H]
+Visited: [A, B, E, G, F, C, H]
+Pop H
+Stack: [A, B, F, C]
+Visited: [A, B, E, G, F, C, H]
+Pop C
+Stack: [A, B, F]
+Visited: [A, B, E, G, F, C, H]
+Stack: [A, B, F, D]
+Visited: [A, B, E, G, F, C, H, D]
+Pop D
+Stack: [A, B, F]
+Visited: [A, B, E, G, F, C, H, D]
+Pop F
+Stack: [A, B]
+Visited: [A, B, E, G, F, C, H, D]
+Pop B
+Stack: [A]
+Visited: [A, B, E, G, F, C, H, D]
+Pop A
+You're done <3!
+
+BFS is different!  You use a Queue instead!
+Queue: [A]
+Visited: [A, B]
+Add B to Queue
+Queue: [A, B]
+Visited: [A, B, D]
+Add D to Queue
+Queue: [A, B, D]
+Visited: [A, B, D, G]
+Add G to queue
+Dequeue A
+Queue: [B, D, G]
+Visited: [A, B, D, G, E]
+Add E to queue
+Queue: [B, D, G, E]
+Visited: [A, B, D, G, E, F]
+Add F to queue
+Queue: [B, D, G, E, F]
+Dequeue B
+Dequeue D
+Dequeue G
+Dequeue E
+Queue: [F]
+Visited: [A, B, D, G, E, F, C]
+Add C to queue
+Queue: [F, C]
+Visited: [A, B, D, G, E, F, C, H]
+Add H to queue
+Queue: [F, C, H]
+Visited: [A, B, D, G, E, F, C, H]
+Dequeue H
+Dequeue C
+Dequeue F
+Queue empty, you're done <3!
+

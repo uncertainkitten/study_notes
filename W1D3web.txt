@@ -1,0 +1,35 @@
+ What happens when you type in www.google.com and hit enter?
+
+ 1. The browser checks the cache to see if it has a DNS record corresponding to the IP address of google.com
+ More completely, it checks the browser cache, the OS cache, the router cache, and then the ISP cache.
+ If the URL is not found in any of these caches:
+ 2. The ISP's DNS server starts a query for the URL
+ (OR whichever DNS you are using - you might have set your DNS to be google's DNS instead of Comcast's)
+ This is called a recursive search, the DNS server query goes from DNS server to DNS server until it finds the result or has tried everything and
+ returns a 404 - the search goes through the levels of the domain - in the example, it will try the root server, then redirect to
+ the .com DNS server, then google.com, then www.google.com, and if it finds it, it returns the IP.
+
+ 3.  After the URL is found, a TCP connection is initiated with the server
+ A TCP/IP three-way handshake is initialized - the client and the server exchange SYN (synchronize) and ACK (acknowledge) messages
+ The three steps are:
+ a) Client machine sends a SYN packet to the server on the internet asking if it is open for new connections
+ b) If the server has open ports that can accept and initiate new connections will respond with an ACKnowledgement of the SYN packet with a 
+ SYN/ACK packet
+ c) The client receives the SYN/ACK packet and responds with an ACK packet.
+
+ 4. The browser sends an HTTP request to the web server
+ In the example, a GET request is sent by the client to the server once the connection is established.  The request will contain information in the
+ header of the request (such as User-Agent, Authorization, and Accept headers) as well as connection headers asking to keep the connection open
+
+ 5. The server handles the request and sends back a response
+ The request handler is a program that reads the request's header and cookies to check what is being requested, update the server if needed, and then
+ assemble a response for the client to parse
+
+ 6. The server sends out the http response
+ The response will contain the web page, the status code, compression type (content-encoding), how to cache the page (cache-control), cookies to set,
+ privacy info, etc.
+
+ 7. The browser displays the HTML content
+ This is done in stages - first it displays HTML content without scripts, then it requests additional elements like CSS styles, JS scripts, etc - then
+ these get cached so that the browser doesn't have to request them every time the page is visited.  Lastly, it renders the page with all the bells and
+ whistles.

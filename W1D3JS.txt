@@ -1,0 +1,32 @@
+ What is the difference between the memory heap and call stack in javascript?
+  The call stack generally stores pointers and primitives, whereas the memory heap stores the actual objects and other things in an unordered fashion
+
+ What is one problem with programming languages that are fully single-threaded
+ -Blocking behavior - if a function is moving slowly, it's going to block the call stack and not allow other functions to execute.  Your program
+ "hangs".
+
+
+What the heck is the event loop anyway?
+
+Well first, what is javascript?  A single-threaded non-blocking asynchronous concurrent language
+The event loop is part of the Web API
+
+Call stacks are fairly simple - you invoke functions, and they are pushed onto the call stack.  From there, when you've
+stopped pushing functions on stack, they start returning, popping off the stack
+
+Blocking - what happens when things are slow?
+Blocking is when your script is hanging on a function that is slow
+This is a problem in browsers because it locks up the entire browsers
+
+The solution is asynchronous callbacks
+How does this work?  concurrency and the event loop
+
+So when you call an asynchronous callback with, say, setTimeout, the timer is kicked to the browser's webAPI, and the browser takes care of handling that
+while the call stack is still doing its thing.  Now, the webAPI can't just shove the async callback back into the stack wherever - it first goes to the
+task queue, and then the event loop looks at the call stack, the task queue, and if the call stack is empty, it will shove the first task in task queue
+onto the call stack.
+
+Note! SetTimeout is a MINIMUM time to execution - if you have 4 setTimeouts for 1000 ms each, it still has to queue the functions
+
+Not all callbacks are async - i.e., forEach takes a callback but runs it through the stack
+
