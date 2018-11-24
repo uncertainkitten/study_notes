@@ -1,0 +1,16 @@
+ Why do we need a DNS?
+ So essentially, we need a DNS to allow IP addresses to be human accessible, and to be able to (relatively) quickly search for things - so it uses a 
+ tree structure to accomplish this and makes the entire process of accessing a webpage much easier than having to remember a bunch of IP addresses or 
+ try to iteratively hit every server in the world in search of an address.
+
+ well first, what is a DNS?  A DNS is a domain name server - it recursively checks the path to find the IP address you're trying to go to
+
+ Steps to a DNS request:
+ First you ask your browser to go to a site
+ Then the browser queries a DNS resolver - the DNS resolver is there to translate the request into something the DNS server can parse
+ The DNS resolver queries the root servers to find the TLD (like .com)
+ Then the DNS resolve queries the server for that TLD - for .com, this is Verisign.  Then it gets back the server hosting the rest of the address,
+ as well as the IP for that server
+ Then you query the IP address you just got back, sending an HTTP request
+ And then the website files are delivered to browser
+

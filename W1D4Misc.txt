@@ -1,0 +1,34 @@
+ In which order do the React Lifecycle methods (including the optional ones) run?
+ componentWillMount, componentDidMount, componentWillReceiveProps, shouldComponentUpdate, componentWillUpdate, render, componentDidUpdate, componentWillUnmount
+
+ In which lifecycle methods should you make asynchronous fetches for data?
+  componentDidMount - that way your component is mounted and can accept the data, but also has the data accessible to hydrate state.
+
+ In which lifecycle methods can you call setState?
+  componentWillMount (but don't, seriously), componentDidMount, componentWillReceiveProps, componentDidUpdate
+
+ React lifecycle, in order:
+ componentWillMount - Right before your component mounts, things can happen to it.  However, you...frequently just don't use this.  Your component's
+ default config should be in the constructor.  You can't mess with the DOM before the component exists.  This is mostly used for connecting/configuring
+ an external API.  You should honestly only be doing this on a top level component anyway.
+
+ componentDidMount - Right after your component mounts.  This is where you should load in your data - anywhere else in the lifecycle, you cannot be
+ sure that your data is accessible by the time the component mounts - ComponentDidMount gives you this assurance.
+
+ componentWillReceiveProps - This is called right before props are passed down to the component - if there's some change in the parent state that
+ changes props passes down, this is where you can mess with them.  Here you want to check which props will change, and act on that change.  This isn't
+ called on initial render (because there aren't old props to compare to)
+
+ shouldComponentUpdate - This lifecycle method should always return a Boolean, because it determines whether the component, uh, should update or not
+ It takes nextState and nextProps as args and mostly is a good place to put in performance improvements (such as preventing intermediate updates when
+ state or props change frequently)
+
+ componentWillUpdate - This is mostly a worse componentWillReceiveProps.  It can't setState, and is mostly helpful if you have shouldComponentUpdate
+ because you're already tampering with the React flow.
+
+ componentDidUpdate - Mostly useful for updating the DOM in response to prop or state changes.  It can also call setState
+
+ componentWillUnmount - This is a good place to clean up anything started by your component - setIntervals, network connections, etc.
+
+
+

@@ -1,0 +1,7 @@
+ Is Javascript a single-threaded language? Explain (Hint: This may not be a yes or no question)
+ Soooorta.  Javascript is "A single-threaded non-blocking asynchronous concurrent language" - meaning, yes, it is single threaded, but can handle
+ asynchronicity via concurrency.  The non-blocking part is essentially the event loop - if you arrange your slower functions to be passed to the event
+ loop, then they won't block your stack.  So, JS is single threaded but has handlers for multiple functions to execute "at once", even if it is not
+ actually parallelizable.
+
+ 

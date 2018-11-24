@@ -1,0 +1,8 @@
+What are the steps for BFS on a graph?
+
+You start traversal from a node on the graph (usually the first label order node)
+You put that node in the queue, and you visit the adjacent nodes in label order
+You put those nodes in the queue one at a time.
+Once you've run out of unvisited adjacent nodes, you move on to the next node in the queue.
+Rinse and repeat until you've run out of nodes in your queue
+
