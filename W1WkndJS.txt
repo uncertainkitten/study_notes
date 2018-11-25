@@ -1,0 +1,51 @@
+ What is the risk we face when using == vs ===?
+ Type coercion and getting non-intutive returns
+
+ When is the value of this evaluated?
+ At runtime.
+
+ How does use strict affect the value of this?
+ When you use strict, "this" without an object is undefined.  Otherwise, it's the global object
+
+ Without use strict, what is the value of this inside a named or anonymous function?
+  No value until the function is called
+
+ What is the value of this in method style syntax?
+ Usually the class or object the method is a part of.
+
+ So first, == vs. ===
+ SPOILERS the answer is type coercion
+
+ Basically, == checks for equality _with_ coercion (i.e., "5" and 5 are equal)
+ === checks for strict equality
+
+ ...oh my god what.
+ So APPARENTLY, when you compare two values and one is a Boolean and the other isn't, the Totally Legitimate Type Coercion is to turn the Boolean into
+ a number.
+
+ Tricky comparisons:
+ false == ""  // true
+false == []  // true
+false == {}  // false
+"" == 0      // true
+"" == []     // true
+"" == {}     // false
+0 == []      // true
+0 == {}      // false
+0 == null    // false
+
+Second, this
+The value of "this" is the object "before dot", the one used to call the method.
+The value of "this" is evaluated at runtime and not bound
+In strict mode, if you call "this" without an object, it is undefined.  However, in non-strict mode, "this" will be the global object (i.e. window)
+
+Now, tricky edge cases with "this" - the way obj.method() works is that first the ',' retrieves the property obj.method, and then the parens execute it
+So the trick here is that obj.method doesn't return a function, it returns a reference type.  The value is (base (object), name(property), strict(bool)
+).  When parentheses are called on the reference type, they receive the full value, so that they can get the object this refers to, the name of the
+function/property, and whether to use strict. So basically, if you try to create a reference to a function without invoking it immediately, and it
+involves this, it probably won't work because the reference type isn't defined.
+
+
+Arrow functions have no this, and that's how come you can use arrow functions to keep "this" as a reference to the outer function.
+
+

@@ -1,0 +1,36 @@
+When is using an IIFE necessary?
+Usually when you want to define a new variable scope - but you can use it to attach private data to a function and create fresh environments
+
+What is the syntax for an IIFE?
+You surround the function in parentheses, and then add a set of parentheses at the end for the invocation
+
+
+An IIFE is an Immediate Invoked Function Expression
+it's a function expression that is called immediately after you define it
+Syntax - surround it in parenthesis, and end with ()
+
+ex:
+```
+var result = [];
+for (var i=0; i < 5; i++) {
+  result.push( function() { return i } );
+}
+console.log( result[1]() ); // 5
+console.log( result[3]() ); // 5
+result = [];
+for (var i=0; i < 5; i++) {
+  ---
+  (function () {
+    var j = i; // copy current value of i
+    result.push( function() { return j } );
+  })();
+  ---
+}
+console.log( result[1]() ); // 1
+console.log( result[3]() ); // 3
+```
+
+Using IIFE allows you to:
+attach private data to a function (but kind of in reverse of a closure - you execute the function before anything is accessible by the outer function)
+Creates fresh environments
+Avoids polluting the global namespace (you free up the variables you might have used in your IIFE)

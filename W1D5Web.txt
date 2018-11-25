@@ -1,0 +1,24 @@
+ Explain TCP, and why it is a necessary protocol
+ TCP is a protocol to make sure data gets from one place to another.  The way it does this is breaking up the data into smaller pieces so that 
+ it can more flexibly be routed through a variety of interconnected machines until the data reaches its destination.  TCP then handles acknowledgement
+ of the packets, confirming that they have all been received and reassembled.  It is necessary to make sure that data makes it safely through the Internet
+ in a fast and efficient manner.
+
+ TCP/IP - Transmission Control Protocol/Internet Protocol
+
+ TCP/IP is made up of layers:
+ Top layer is Application layer - this has protocols such as HTTP or SMTP
+ Next layer is the transport layer - this is where TCP lives (UDP also lives here)
+ TCP chops up the data from the application layer into packets, and puts a header on top so that the packets can be put back together well
+ After this, the packets go to the Internet layer, where IP lives
+ Network layer is the last layer, handling things like MAC addresses and other hardware stuff - it makes sure it goes to the right machine and the
+ electrical signals make sense
+
+ Packets, routers, and reliability:
+ TCP/IP breaks things into packets, and routers redirect those packets around until they reach their destinations.  It's ok if they arrive out of order
+ because the headers allow you to reassemble them.  Routers keep track of cheapest paths (which can be influenced by company relations,
+ politics, congestion, etc.).  TCP manages the packets - it acknowledges each packet, and will only confirm the delivery of the data if all the packets
+ are there.  If there isn't a confirmation, the packets are re-sent
+
+
+

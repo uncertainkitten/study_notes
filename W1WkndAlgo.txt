@@ -1,0 +1,143 @@
+ Explain the steps of Djikstra shortest-path algorithm.
+ 1. Put all your vertices in a MinHeap+HashMap structure, and set values to infinity
+ 2. Initialize a Distance HashMap and a Path HashMap
+ 3. Set source vertex to 0.
+ 4. Extract min, set source path to null, set source node distance to 0 in distance HashMap
+ 5. Explore neighbors of extracted node, compare the weights to existing values for those nodes, and use the lower value
+ 6. Once neighbors are exhausted, do another extract min and repeat process.
+ 7. Be sure to add the distance of the extracted node to the distance to the next node when doing comparisons
+ 8. Once the MinHeap+HashMap is empty, you're done
+
+ What is the time complexity of Djikstra's algorithm?
+ O(E(log(V))), unless you only use a HashMap, in which it is O(V^2)
+
+
+ This is used to find the shortest path from a source vertex to every other vertex.
+ Djikstra's algorithm for solving shortest path works on directed and undirected graphs, provided your edge weight is never negative
+
+ The data structures required for Djikstra's algo is Heap+Map (combination of binary heap and hash map), with access to add (at O(log(n))), 
+ extract-min O(log(n)), contains O(1), and decrease O(log(n))
+
+So you start off with your Heap+Map, with all the vertices set at infinity, since you don't know how far they are from your starting vertex
+Let's say the graph is:
+
+    B-2-C
+   /    |
+  5     3
+ /      |
+A---9---D
+ \      |
+  2     2
+   \    |
+    E-3-F
+
+Heap+Map
+{A: inf, B: inf, C: inf, D: inf, E: inf, F: inf}
+Obviously, though, A is distance 0 from itself.  So you set A to 0, and extract min
+{A:0, etc.}
+EXTRACT
+{B: inf, C: inf, D: inf, E: inf, F: inf}
+Now find out how far things are from each other
+A -> B: 5
+A -> C: ?
+A -> D: 9
+A -> E: 2
+A -> F: ?
+
+{B: 5, C: inf, D: 9, E: 2, F: inf}
+EXTRACT MIN
+And you get out E: 2
+Now explore the neighbors
+E -> A: 2
+E -> F: 3
+{B: 5, C: inf, D: 9, F: 5}
+So obviously F is A -> E + E -> F, and now 5.  Keep doing this with extract min until you have values for everything
+F -> E: 3
+F -> D: 2
+2 + 3 + 2
+{B: 5, C: inf, D: {7, 9}}
+Extract min!
+B -> A: 5
+B -> C: 2
+{C: 7, D 7}
+Extract min!
+C -> B: 2
+C -> D: 3
+5 + 2 + 3 = 10
+{D: 7}
+Extract min!
+D -> C: 3
+D -> F: 2
+D -> A: 9
+5+2+3 = 10
+9 = 9
+2+3+2 = 7
+{}
+
+
+Now how do we track all this?  We have two other hash maps - a distance map and a path map.  Distance tracks shortest distances, and path tracks
+shortest paths
+
+So, dry run:
+Source: A, Current: A
+HashMap: {A: 0, B: inf, C: inf, D: inf, E: inf, F: inf}
+Distance map: {}
+Path map: {}
+
+Source: A, Current: A
+HashMap: {B: inf, C: inf, D: inf, E: inf, F: inf}
+Distance map: {A: 0}
+Path map: {A: null}
+
+Source: A, Current: A
+Check neighbors:
+HashMap: {B: inf > 5 => 5, C: inf, D: inf > 9 => 9, E: inf > 2 => 2, F: inf}
+Distance map: {A: 0}
+Path map: {A: null, B: A, D: A, E: A}
+
+A has explored all neighbors, let's do another extract min
+Source: A, Current: E
+HashMap: {B: 5, C: inf, D: 9, F: inf}
+Distance map: {A: 0, E: 2}
+Path map: {A: null, B: A, D: A, E: A}
+
+Now, you ignore a neighbor if it is no longer in the heap+map datastructure, so no need to look at E -> A.  We then check F, and also add anything from
+the distance map to the path value (We did this with A as well, but A was 0)
+Source: A, Current: E
+HashMap: {B: 5, C: inf, D: 9, F: inf > 2+3 => 5}
+Distance map: {A: 0, E: 2}
+Path map: {A: null, B: A, D: A, E: A, F: E}
+
+So, now we are out of neighbors - so now what?
+Extract min!
+Source: A, Current: B
+HashMap: {C: inf > 5+2 => 7, D: 9, F: 5}
+Distance map: {A: 0, E: 2, B: 5}
+Path map: {A: null, B: A, D: A, E: A, F: E, C: B}
+
+Extract Min!
+Source: A, Current: F
+HashMap: {C: 7, D: 9 > 5 + 2 => 7}
+Distance map: {A: 0, E: 2, B: 5, F: 5}
+Path map: {A: null, B: A, D: F, E: A, F: E, C: B}
+
+Extract Min!
+Source: A, Current: C
+HashMap: {D: 7 < (7 + 3) => 7}
+Distance map: {A: 0, E: 2, B: 5, F: 5, C: 7}
+Path map: {A: null, B: A, D: F, E: A, F: E, C: B}
+no change
+
+Extract Min!
+Source: A, Current: D
+HashMap: {}
+Distance map: {A: 0, E: 2, B: 5, F: 5, C: 7, D: 7}
+Path map: {A: null, B: A, D: F, E: A, F: E, C: B}
+
+And now you have shortest paths, and shortest distances
+For pathing, you start from destination and key into the hash at each value given until you reach the source
+Time complexity: O(E(log(V)))
+Space complexity: O(E + V)
+
+
+

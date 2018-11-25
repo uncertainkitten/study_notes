@@ -1,0 +1,85 @@
+React Review!
+
+Fundamentals:
+React is all about components
+Define smaller components, put them together into bigger components.  Make them reusable
+
+What is JSX?
+Well, you can do stuff _without_ JSX with pure ReactJS, using things like React.createElement, giving it a name, props, and state
+Then you do ReactDOM.render(createElement(element), mountNode)
+
+CreateElement actually creates a tree of elements - you can specify children to the element.
+Examples:
+// Example 3 -  React’s createElement API
+// https://jscomplete.com/repl?j=r1GNoiFBb
+const InputForm = React.createElement(
+  "form",
+  { target: "_blank", action: "https://google.com/search" },
+  React.createElement("div", null, "Enter input and click Search"),
+  React.createElement("input", { name: "q", className: "input" }),
+  React.createElement(Button, { label: "Search" })
+);
+// InputForm uses the Button component, so we need that too:
+function Button (props) {
+  return React.createElement(
+    "button",
+    { type: "submit" },
+    props.label
+  );
+}
+// Then we can use InputForm directly with .render
+ReactDOM.render(InputForm, mountNode);
+
+Note, InputForm is a React _element_, not a component.  Note we used React.createElement in the definition, _not_ extends React.component
+
+Notes from the example:
+It also accespts multiple args after the first two, to be the list of children
+We can nest the calls because it's all Javascript
+When you don't have props or attributes for the element, the second argument to createElement can be null (much like connect)
+We can mix HTML element with React elements.
+
+Now, instead of that garbage up there, we can use JSX instead:
+const InputForm =
+  <form target="_blank" action="https://google.com/search">
+    <div>Enter input and click Search</div>
+    <input name="q" className="input" />
+    <Button label="Search" />
+  </form>;
+// InputForm "still" uses the Button component, so we need that too.
+// Either JSX or normal form would do
+function Button (props) {
+  // Returns a DOM element here. For example:
+  return <button type="submit">{props.label}</button>;
+}
+// Then we can use InputForm directly with .render
+ReactDOM.render(InputForm, mountNode);
+
+The "HTML elements" there are actually React elements still, but this is much more readable.
+
+(JSX can also be used without React)
+
+You can use JS expressions anywhere in JSX - use curly braces =D
+However, you can ONLY use expressions - fortunately, variables, objects, ternaries, etc. are expressions
+React Components - also expressions (because they're function calls, mostly)
+
+You can write React Components with JS classes
+
+// Example 9 - Creating components using JavaScript classes
+// https://jscomplete.com/repl?j=ryjk0iKHb
+class Button extends React.Component {
+  render() {
+    return <button>{this.props.label}</button>;
+  }
+}
+// Use it (same syntax)
+ReactDOM.render(<Button label="Save" />, mountNode);
+
+class Field syntax allows you to define instance properties without a constructor
+
+Events in React have two differences:
+They use camelCase rather than lowercase
+We use a JS function reference in the handler, rather than a string
+
+React wraps the DOM event handler with an object of its own to make better performance - but the DOM event handler is still there
+
+

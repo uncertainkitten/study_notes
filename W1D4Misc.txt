@@ -7,6 +7,11 @@
  In which lifecycle methods can you call setState?
   componentWillMount (but don't, seriously), componentDidMount, componentWillReceiveProps, componentDidUpdate
 
+ Give one explanation for why we have to make AJAX requests in componentDidMount
+  Because you can't really make the call _before_ the component mounts, because the data doesn't really have any place to go - if the call completes
+  before the object mounts, React gets p. upset to you. If you do it in componentDidMount, you know for a fact a component is there for the data to
+  go into.
+
  React lifecycle, in order:
  componentWillMount - Right before your component mounts, things can happen to it.  However, you...frequently just don't use this.  Your component's
  default config should be in the constructor.  You can't mess with the DOM before the component exists.  This is mostly used for connecting/configuring

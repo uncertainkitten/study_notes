@@ -1,0 +1,76 @@
+ Give an example of a use-case for Topological Sort
+ NPM - you use topological sort to install packages in order so that you don't try to install anything without the dependencies being in place
+
+ What is a difference between Topological Sort and DFS?
+ A topological sort requires you to print a vertex before your print its adjacencies - DFS does not have this constraint.
+
+ On which types of Graphs can we do a topological sort?
+ Directed
+ Acyclic
+ Graph
+ or a DAG.  Toplogical sort relies on there being in edges and out edges, and no possibility of two nodes "depending" on each other
+
+ What data structure do we use to assist with the topological sort algorithm?
+ We use a set and a stack - a set to keep track of visited vertices, and a stack to order the vertices by visited children
+
+So, Topological sort effectively sorts in the order that you can visit nodes - kind of.  Essentially, it orders first by nodes with no "dependencies" or
+in-edges, then checks if there are any new nodes with no unvisited dependencies, so on and so forth until it is done.
+
+Topological sort uses a set and a stack - Set has all visited vertices, whereas the stack has all the vertices in topological order
+
+So let's say we had:
+A   B
+ \ /|
+  C D
+ /  |
+ E  |
+/ \/
+H  F--G
+
+
+Lets start at E.
+Set: {E}
+Stack: []
+Lets visit E's children, (H and F)
+Set: {E, H}
+Stack: []
+Lets visit H's children - Oh wait, there are none
+Set: {E, H}
+Stack: [H]
+Let's visit F
+Set: {E, H, F}
+Stack: [H]
+Let's visit F's children, (G)
+Set: {E, H, F, G}
+Let's visit G's children - oh wait, there aren't any
+Set: {E, H, F, G}
+Stack: [H, G]
+F has no more children, so
+Stack: [H, G, F]
+E has no more children, so
+Stack: [H, G, F, E]
+
+So, we're out of vertices.  So let's visit another unvisited vertex!
+Let's go with B
+So now we have:
+Set: {E, H, F, G, B}
+Stack: [H, G, F, E]
+Visit B's children, (C and D)
+C first
+Set: {E, H, F, G, B, C}
+Stack: [H, G, F, E]
+C's children have already been visited
+Stack: [H, G, F, E, C]
+Go to D
+Set: {E, H, F, G, B, C, D}
+D has child F, but F already visited
+Stack: [H, G, F, E, C, D]
+Then we go back up to B, which has no unvisited children
+Set: {E, H, F, G, B, C, D}
+Stack: [H, G, F, E, C, D, B]
+There's only one unvisited vertex, so that's A
+A obviously has no unvisited children, so
+Set: {E, H, F, G, B, C, D, A}
+STack: [H, G, F, E, C, D, B, A]
+Now we pop off elements one by one from the stack
+Result: [A, B, D, C, E, F, G, H]

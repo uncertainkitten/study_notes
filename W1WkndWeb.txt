@@ -1,0 +1,48 @@
+ What is a datagram?
+ A self-contained, independent entity of data carrying sufficient information to be routed from the source to the destination computer without reliance
+ on earlier exchanges between this source and destination computer and the transporting network. (Hence, the basic packet of UDP)
+
+ What are the benefits of UDP over TCP? What are the shortcomings?
+ UDP has smaller packet size (8 byte header vs. 20 byte headers), no connection to create or maintain, and more control over when data is sent.
+ The drawbacks are a lack of ordering, a lack of compensation for packet loss, and no congestion control.
+
+
+ Transport layer - allows for multiple connections to the same network via ports
+ UDP - User Datagram Protocol
+ Advantages:
+ Smaller packet size (UDP headers: 8 bytes, TCP headers: 20 bytes)
+ No connection to create or maintain
+ More control over when data is sent
+
+ With UDP, if data is lost, it doesn't attempt to resend the data - corrupted data will either be discarded or sent through with warnings
+ Disadvantages:
+ Does not compensate for packet loss
+ Does not try to send packets in order
+ No congestion control
+
+ TCP - Transmission Control Protocol
+ First has to initiate a connection (with a three-step handshake - Client: SYN, Server: SYN/ACK, Client: ACK)
+ Once this is established, client might send data, and server will send back an acknowledgement. TCP also resends data if it doesn't receive
+ an acknowledgement after a certain amount of time.  Delivery is also done in order. TCP also enforces congestion control and error detection (with checksums)
+
+ Disadvantages:
+ Bigger packet size/ bigger headers
+ Data doesn't get sent out immediately - latency may be intentionally induced
+ Bigger overhead - the acknowledgements and retransmissions do add up, and this may not be necessary for things that can handle packet loss
+
+ UDP is message oriented, TCP is stream-oriented
+
+ TCP is useful when data loss can't be tolerated or in-order delivery is needed, or you need acknowledgements (though you can incorporate acks on
+ application layer in UDP)
+
+ With things like video streaming, where you can lose packets, UDP is fine.  UDP is also good for small transactions such as DNS lookups.  So UDP
+ is good for things that tolerate packet loss or small transactions that don't benefit from opening a connection for each transactions - also when you
+ need fast transmissions
+
+
+
+
+
+
+
+
