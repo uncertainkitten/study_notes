@@ -1,5 +1,5 @@
  What is the risk we face when using == vs ===?
- Type coercion and getting non-intutive returns
+ Type coercion and getting non-intuitive returns
 
  When is the value of this evaluated?
  At runtime.
@@ -8,7 +8,7 @@
  When you use strict, "this" without an object is undefined.  Otherwise, it's the global object
 
  Without use strict, what is the value of this inside a named or anonymous function?
-  No value until the function is called
+  The global object, until the function is called
 
  What is the value of this in method style syntax?
  Usually the class or object the method is a part of.

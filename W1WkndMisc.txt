@@ -33,7 +33,7 @@ ReactDOM.render(InputForm, mountNode);
 Note, InputForm is a React _element_, not a component.  Note we used React.createElement in the definition, _not_ extends React.component
 
 Notes from the example:
-It also accespts multiple args after the first two, to be the list of children
+It also accepts multiple args after the first two, to be the list of children
 We can nest the calls because it's all Javascript
 When you don't have props or attributes for the element, the second argument to createElement can be null (much like connect)
 We can mix HTML element with React elements.
