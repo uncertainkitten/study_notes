@@ -1,0 +1,131 @@
+HTTP status codes:
+1xx - Informational:
+100 - Continue
+Client should continue - this is an acknowledgement that the initial part of the request has been received (request headers received,
+client should send request body)
+
+101 - Switching Protocols
+Client has asked the server to switch protocols, and the server acknowledges this and will do so (such as, upgrade to newer version of HTTP,
+or to Websockets)
+
+102 - Processing
+Interim response used to tell the client that the server has accepted the complete request, but has not yet completed it.  This is usually sent
+for requests that will take some time to complete (guideline is >20 seconds).  This serves to keep client from timing out connections
+
+2xx - Success:
+200 - OK
+Request succeeded, information requested gets sent
+
+201 - Created
+Request has been fulfilled and a new resource has been created.  The resource can be accessed with the URI returned by the location address in the header
+of the response
+
+202 - Accepted
+Request accepted for processing, but the processing is incomplete.  This code is non-committal, but does not require the user-agent to remain
+connected
+
+203 - Non-authoritative information
+Information from header isn't from the origin server, may be a local or third-party copy.  So the request was successful but info is returned from
+another source
+
+204 - No Content
+The request was completed successfully but the server does not need to return anything
+
+205 - Reset Content
+Request completed successfully, server is not returning content, but the client should reset the document view
+
+206 - Partial Content
+The server is only delivering part of the content due to a range header set by the client
+
+207 - Multi-status
+The message body that follows is an XML message and may contain a number of separate response codes
+
+208 - Already Reported
+The members of a DAV binding have already been enumerated in a previous reply to this request, and are not being included again.
+
+226 - IM used
+The server has fulfilled a GET request for the resource, and the response is a representation of the result of one or more
+instance-manipulations applied to the current instance.
+
+3xx - Redirection:
+300 - Multiple Choices
+There are multiple paths to the requested resource
+
+301 - Moved Permanently
+This + all future requests should be redirected to the new URI
+
+302 - Found
+Requested resource temporarily resides under a new URI - original URI should still be used for requests given the redirection might be altered
+
+303 - See Other
+Response to request may be found under another URI
+
+304 - Not Modified
+Resource has not been modified since last requested - saves bandwidth and reprocessing
+
+305 - Use Proxy
+Requested resource MUST be accessed through a Proxy
+
+306 - (Unused)
+No longer used. Originally meant "Subsequent requests should use the specified proxy."
+
+307 - Temporary Redirect
+Request should be repeated with another URI, future requests should use original URI
+
+308 - Permanent Redirect
+The request, and all future requests should be repeated using another URI.
+
+307 and 308 are different from 301 and 302 because they do not require the HTTP method to change
+
+
+
+4xx - Client Error:
+400 - Bad Request
+401 - Unauthorized
+402 - Payment Required
+403 - Forbidden
+404 - Not Found
+405 - Method Not Allowed
+406 - Not Acceptable
+407 - Proxy Authentication Required
+408 - Request Timeout
+409 - Conflict
+410 - Gone
+411 - Length Required
+412 - Precondition Failed
+413 - Request Entity Too Large
+414 - Request-URI Too Long
+415 - Unsupported Media Type
+416 - Requested Range Not Satisfiable
+417 - Expectation Failed
+418 - I'm A Teapot
+420 - Enhance Your Calm
+422 - Unprocessable Entity
+423 - Locked
+424 - Failed Dependency
+425 - Reserved for WebDAV
+426 - Upgrade Required
+428 - Precondition Required
+429 - Too Many requests
+431 - Request Header Fields Too Large
+444 - No Response (NGINX)
+449 - Retry With (Microsoft)
+450 - Blocked By Windows Parental Controls (Microsoft)
+451 - Unavailable for Legal Reasons
+499 - Client Closed Request (NGINX)
+
+5xx - Server Error:
+500 - Internal Server Error
+501 - Not Implemented
+502 - Bad Gateway
+503 - Service Unavailable
+504 - Gateway Timeout
+505 - HTTP version not supported
+506 - Variant Also Negotiates
+507 - Insufficient Storage (WebDAV)
+508 - Loop Detected (WebDAV)
+509 - Bandwidth Limit Exceeded (Apache)
+510 - Not Extended
+511 - Network Authentication Required
+598 - Network Read Timeout Error
+599 - Network Connect Timeout Error

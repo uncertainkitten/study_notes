@@ -1,0 +1,11 @@
+In which phase does hoisting occur?
+During the compilation phase
+
+What is the difference between function hoisting and variable hoisting?
+Function hoisting is complete - the entire function is hoisted to the top of the script, meaning you can call it before declaration in your code
+Variables (and only var) are partially hoisted - the declaration of the variable is hoisted, but not the assignment
+
+Hoisting - the behavior of "moving" var and function calls to the top of their scopes during the compilation phase
+Function declarations are completely hoisted - a function can be called before its declaration
+
+Variables are partially hoisted - var declarations are hosted, but not the assignments

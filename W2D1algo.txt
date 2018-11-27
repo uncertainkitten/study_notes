@@ -1,0 +1,84 @@
+What is a base case in recursion? Why do we need one? Do we always need one?
+
+A base case is the solved problem that you are building off of to solve the bigger problem by doing things to the solved problem over and over
+Yes, you need a base case, because _otherwise_ your function goes on forever and ever because it is a function and cannot make an educated guess
+as to when to quit without being told.  Why is this even a question?
+
+What exactly is a Stack Overflow?
+Stack Overflow is what happens when you don't give your function a base case it will always reach, or just overall neglect to define one.  It means that
+your function generated so many stack frames it ate up all the allocated memory (it can also sometimes happen if you try to solve too big a problem
+recursively without optimizations)
+
+Describe direct and indirect recursion
+Direct recursion is when the function directly calls itself - i.e., a thing like recursive sum or recursive factorials where you just call the function
+on the next lowest number until you get to the base case.  Indirect recursion is when the function calls another function, and _that_ function calls
+the original function.  See: Merge sort
+
+What is tail call recursion? Why is it helpful, if at all?
+Tail call recursion is great! It means that you did something to make it so that the function doesn't have any steps left or reason to exist when it
+moves on to the next function call, meaning that the compiler can just clear that stack frame.  If you track values in the arguments, that's a great
+way to eliminate non-tail recursion.  It overall means you take up less space.
+
+Discuss advantages/disadvantages of recursion
+Pros of recursion:  Cleaner code, some problems are inherently recursive such as tree/graph traversals
+Cons of recursion:  Anything recursion can do iteration can do, tends to take up more space and time because of the call stack
+
+How is memory allocated during recursive function calls?
+When a function is called, the memory associated with it is allocated to the stack - recursive calls just get shoved on top of the initial call until
+they resolve - a copy of the local variables involved is put in this new memory allocation, and all the calls just sit there until they get
+the information they are waiting on, and then the recursive call unspools and you end up back at the original function, when then resolves.
+
+
+What is "recursion"?
+A function which calls itself (directly or indirectly)
+
+The base case/condition in recursion is an example of a solved problem that forms a part of the bigger problem you're trying to solve.
+
+How do you solve problems with recursion?
+You use a smaller, solved problem to form the pieces of the bigger problem - and the solved problem is the base case so that your program eventually
+stops recursing
+
+Why does stack overflow occur in recursion?
+If a base case is not reached or is not defined, then your function has nothing to tell it to stop calling itself.
+
+Direct vs. indirect recursion:
+A function is call directly recursive if, within the function itself, it calls the same function
+
+def recur(blah)
+  return "blah" if blah == 0
+  recur(blah - 1)
+end
+
+It is indirectly recursive if it calls another function, and _that_ function calls the original function
+
+def recur(blah)
+  return "blah" if blah == 0
+  return blah(blah - 1)
+end
+
+def blah(blah)
+  return recur(blah)
+end
+
+Tail recursion vs. non-tail recursion
+A function is tail recursive when it is the last thing called by the function
+Going deeper into tail recursion:
+A recursive function is tail recursive when the recursive call is the last thing executed by the function - the advantage this holds over non-tail
+recursion is that compilers are optimized for tail recursion.  If the recursive call is at the end of the function, the compiler can assume nothing more
+is being done _in_ the function, and can clear the current functions stack frame
+
+Can a non-tail recursive function be written tail-recursive to optimize it?
+Well, understand that a tail recursive function is one in which you no longer need the current stack frame - so the idea is if you use an argument to
+accumulate whatever values are being tracked, you don't need previous stack frames to hold those values.  So yes, depending on the thing you're doing
+
+
+
+Pros and cons of recursion over iteration:
+Cons: Any program that can be written recursively can be written iteratively, and vice versa.  Recusion takes up more space and time, because function calls
+have overhead, and take up space on the stack
+
+Pros:  Some recursive functions allow for writing cleaner code.  Some problems are inherently recursive, such as tree traversals - however, these can
+be written iteratively with stacks.  Regardless, recursion tends to be cleaner in these cases
+
+
+

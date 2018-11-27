@@ -1,0 +1,33 @@
+What is a state tree in the context of Redux?
+The tree of changes made to the state - since each change to state has been made explicitly, you can trace back and forth through the tree easily
+
+Why don't we want to modify (i.e. mutate) our redux state?
+Because you want the state tree to be redundant and rebuildable - if you mutate state you might get unexpected side effects
+
+What is a pure function? Impure function?
+A pure function is a function that does not have side effects and does not make direct modifications to its arguments.
+An impure function does have side effects or might change arguments
+
+Describe in detail what a redux reducer is. What makes it a pure function?
+A redux reducer is a function that takes in the previous state and the action, and produces a next state based on these.  It does not change the 
+previous state or the action, and it doesn't rely on side effects to produce the next state.  What makes this fast for redux is that each reducer is
+only concerned with a certain type of action, and will otherwise just return the rest of the state as it was in the previous state.
+
+Redux - lets you represent the entire state of your application as a single JS object
+All changes to the state in Redux are explicit
+
+Redux's state tree is redundant - describe state changes with actions rather than directly modifying state.  Actions are POJOs that represent the
+requested change to state.  Actions are required to have a type attribute and nothing else (for reducers)
+
+Pure and impure functions - Pure functions - return value depends purely on the arguments passed to the function.  No side effects.
+Pure functions also do not overwrite the arguments passed to them - they return new copies with the modifications.
+
+Impure functions do have side effects or might change arguments
+
+Redux: The reducer function
+State changes should be described as pure functions - you take in previous state and the action being dispatched, and return the next state of the
+application.  This doesn't modify the previous state or the action being dispatched.  State is never mutated
+
+Reducers basically only track changes that they are concerned with - they filter by action type.  When the action type isn't relevant to the reducer,
+it just returns the previous state.
+

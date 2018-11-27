@@ -1,0 +1,14 @@
+What does the new keyword do in Javascript?
+It does 4 things - creates a new object, sets the object's prototype to be the prototype of the constructor function, it executes the constructor
+function with "this" as the newly created object, and it returns the created object
+
+What type of function is invoked with the new keyword? What does this function return?
+The constructor function is what is invoked with the new keyword - it returns a created object
+
+The new keyword invokes the constructor function of an object
+What does new do?
+1. Creates a new object
+2. Sets the object's prototype to be the prototype of the constructor function
+3. Executes the constructor function with "this" as the newly created object
+4. Returns the created object - if the constructor function returns an object, this object is returned
+

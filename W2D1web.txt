@@ -1,0 +1,24 @@
+What are the common HTTP methods? When are they used, and what do they accomplish? (This is a big one)
+Common HTTP methods: GET, POST, PUT/PATCH, DELETE, though HEAD, CONNECT, OPTIONS, and TRACE exist
+GET is used to retrieve information from a server - it does not modify or otherwise mess with representations of data.
+POST is used to send representations of data to a server, which will be processed and a response accepting or refusing the data is sent
+PUT/PATCH requests are used to replace representations of the target resource with whatever content is uploaded
+DELETE removes all current representations of the target resource given by the URI
+HEAD is a get request that only returns the status and header
+CONNECT establishes a tunnel to the server identified by the URI - this is where the three-step handshake comes information
+OPTIONS describes communication options for the target resource
+TRACE performs a message loop-back test along the path to the target resource
+
+HTTP
+GET:  Used to retrieve information from the server of a given URI.  GET should only retrieve data and have no other effect on the data
+HEAD:  Same as get, but used only to transfer status line and header
+POST:  A post request is used to send data to the server using HTML forms
+PUT/PATCH: Replaces all current representations of the target resource with the uploaded content
+DELETE:  Removes all current representations of the target resource given by the URI
+CONNECT:  Establishes a tunnel to the server ID'd by the URI
+OPTIONS:  Describes the communication options for the target resource
+TRACE: Performs a message loop-back test along the path to the target resource
+
+POST data is processed by a process.cgi, and then a response will be sent acknowledge or refusing the change.
+
+

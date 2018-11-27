@@ -1,0 +1,28 @@
+What is the role of the store in Redux?
+The store is the state handler in Redux - it holds the initial and current state, it provides the dispatch function to dispatch actions to change state,
+and it allows you to subscribe to state to track the changes being made to state
+
+What does the subscribe method do in Redux?
+Allows you to track changes to state - the way this works is having an array of listeners for changes in parts of state (the parts of the view that are
+going to change when state changes)
+
+How to write a reducer - default return is state
+Basically, you define cases for various action types (in this example, INCREMENT and DECREMENT)
+The convention in Redux is also to respond to undefined state with what it expects to be the default state of the application (for example, {} or 0)
+If the action dispatched has a type that is INCREMENT or DECREMENT (in this example), you want to return a copy of state with those changes implemented
+Otherwise, you want to return the state passed in because the reducer has no business with this slice of state
+
+Redux store methods: dispatch(), getState(), subscribe()
+What store does: Holds current state, allows you to dispatch actions to change state, and contains the reducer that will process the actions and change
+state (root reducer)
+
+
+How does createStore even work?
+Let's say state is a variable in the createStore function.
+getState just is a getter for the value of state
+dispatch just literally uses the state variable, adds the action function it gets passed in, and uses the reducer function to apply the action to the
+state.
+Subscribe just keeps track of the listeners - to avoid duplicates, you filter subscriptions by existing event listeners
+
+And you want the initial state populated, so you call dispatch with the initial state (this is where you use preloadedState in createStore)
+
