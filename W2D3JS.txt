@@ -1,0 +1,31 @@
+How can you stop event bubbling?
+event.stopPropagation
+
+What is the difference between event.target and event.currentTarget?
+event.target - the element on which the event actually occurred ( the most deeply nested element causing the event )
+event.currentTarget - the element that currently has the event handler running
+
+What does stopImmediatePropagation do?
+Prevents other event handlers on the _same_ element from going off.
+
+Bubbling and capturing:
+When an event happens on an element, the handler on that element is triggered, then handlers on each parent, and then each parent's parent, etc. all
+the way up the ancestral element tree
+
+(Some events don't do this like focus, but most do)
+
+event.target tells us information about the most deeply nested element that caused the event.
+"this", or event.currentTarget, is the element that currently has the event handler running
+
+The method to stop event bubbling is e.stopPropagation
+e.stopImmediatePropagation stops _multiple handlers_ from going off on the same element.  Essentially, if you have multiple things going on, any event
+handler with stopImmediatePropagation will just stop the event in total.
+
+Note - don't stop bubbling without a need - it can sometimes bite you later if you change the functionality of the site and cause weird dead zones for
+things like onClicks
+
+Capturing - another phase of event processing
+Capturing phase - the event propagating _down_ to the target
+If you set the third argument of addEventListener to true - it will listen for the capturing phase
+event.eventPhase tells you what number phase the event was caught (also rarely used tho)
+

@@ -1,0 +1,13 @@
+Redux - avoiding array mutations
+Concat vs. push - concat does not mutate the array.  Push does
+.splice vs. .slice - slice is non mutating - you can remove an element from an array using slice in Redux
+You can also use the ... spread operator instead of slice to make your code much nicer
+
+Avoiding object mutations
+Object.assign allows you to copy an object over to a new object, which you can safely change in Redux
+(The first argument in Object.assign is what properties you want to mutate in the original object, if any.  This is why you pass an empty object as
+this arg)
+You can also spread an object the same way you would an array
+
+Writing a todo list reducer:
+Uh none of this is new

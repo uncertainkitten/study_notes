@@ -1,0 +1,43 @@
+What is the difference between HTTP and HTTPS
+HTTP - passes messages without encryption, does not attempt to verify sender or receipient or message contents.
+HTTPS - certifies the identity of the sender, allows sending encrypted messages after an initial encrypted message to third party verify agents
+
+What is HTTPS?
+HTTP is a way of sending messages from one place to another.  It could be intercepted and changed without either participant knowing
+
+So how about we try encoding the message - a simple Caeser cipher is an example of symmetric key cryptography.  Any alterations would lead to nonsense
+unless the interceptor knows the code.  However, this coordination only really possible if the communicating parties have met and coordinated already.
+
+So, what about cases where that isn't true?  Like, if the key is sent in the message itself, then interception just gives the malicious actor
+the ability to decipher and alter the message.  So if instead, you send a container for your message to the recipient, and the recipient places
+the message in that container and encrypts it, and then when you get the container back, you have the key to open it, then you can make it work
+without coordination.  This is the public key/private key model of cryptography.
+
+Of course, there's a problem where you still don't know if the "container" you're receiving is from the person you're supposed to be receiving it from
+So, the sender could sign the "container" - but you still have the problem of forgery.  So the next step is, what if someone Well Regarded and Well Known
+signs the "container".  This is essentially a Certification Authority.
+
+So basically, we use symmetric cryptography for messages _after_ keys have been exchanged, but asymmetric cryptography for initial establishment
+of identity.
+
+GET vs. POST requests:
+GET requests:
+can be cached
+remain in browser history
+can be bookmarked
+should not be used when dealing with sensitive data
+have length restrictions
+only used to request data
+
+POST requests:
+never cached
+do not remain in browser history
+cannot be bookmarked
+no restrictions on data length
+
+PUT vs. PATCH requests:
+PUT is idempotent - PATCH is not
+PATCH is considered to be a set of changes requested to a resource URI
+PUT is considered to be a representation of the changed resource (hence, idempotent)
+Incidentally, .update is a PUT request, .update_attributes is a PATCH request
+

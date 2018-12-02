@@ -1,0 +1,43 @@
+What is the difference between Memoization and Tabulation?
+Why is memoization helpful?
+
+Dynamic programming - an optimization over plain recursion.  If you have recursive functions making repeated calls for the same inputs, you can 
+optimize it using dynamic programming.  Essentially, you can store the results of subproblems so that you don't have to solve that problem repeatedly
+
+Dynamic programming reduces time complexities from exponential to polynomial.
+
+Overlapping Subproblems property - where a problem's subproblems end up repeating throughout the structure
+
+Memoization - Top-down way of storing results in memory
+Tabulation - Bottom-up way of storing results in memory
+
+Memoization - Initialize a lookup table with all of its elements as nil (or a constant value indicating a lack of solution)
+Call the recursive function f(n) to solve for 'n' using memoization
+
+At every step, f(i) checks whether table[i] is solved or not, and if it is solved, returns that value
+If table[i] is not solved, but i satisfies the base case, we update the lookup table with the base value and return it
+If table[i] is not solved and doesn't satisfy the base case, then f(i) splits the problem into subproblems and calls itself recursively to solve them
+After the recursive call returns, f(i) combines the solutions to the subproblems, updates the lookup table, and returns the solution for problem i
+
+Tabulation - Start a table with the base case values, and then build further solutions from there
+steps:
+Initialize a table with base values of i
+Run a loop that iterates over the remaining values of i
+At every iteration, f(n) updates the "i"th entry in the lookup table by combining the solutions to the previously solved subproblems
+Finally, f(n) returns table[n]
+
+Tabulation works in a bottom-up fashion - it avoids multiple lookups and saves function call overhead time
+Memoization works in a top-down fashion - It sometimes avoids computing solutions to subproblems that are not needed, and is sometimes more intuitive
+to write
+
+Steps to solve DP problems:
+1) Identify if it's a DP problem
+2) Decide a state expression with least parameters
+3) Formulate state relationship
+4) Do tabulation (or add memoization)
+
+DP problems - usually require maximizing, minimizing, or counting problems that require counting under certain conditions.  Certain probability problems
+as well
+
+What is state?  State is a set of parameters that uniquely identify a certain position or standing in a given problem.  For example, in knapsack,
+index and weight are our parameters for state
