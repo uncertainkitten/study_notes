@@ -1,0 +1,15 @@
+What are presentational components?
+Components that are mostly concerned with how the component looks, not the actual behavior of the component - the behavior logic goes into a
+different component, passing props as needed to the presentational component
+
+
+React todoList example:
+The essential idea is that instead of using component state, you use the global state and event handlers to update state on the page
+Also, you can use style= and text decoration to take advantage of global toggles
+
+Presentational comoponents:
+Components that are mostly concerned with how the component looks, not the actual behavior of the component - the behavior logic goes into a
+different component, passing props as needed to the presentational component
+
+
+

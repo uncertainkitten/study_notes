@@ -1,0 +1,21 @@
+What is the difference between localStorage and sessionStorage?
+sessionStorage, predictably, only persists for the duration of the session (i.e., until tab or page close).  Notably, though, it does survive page
+refresh
+
+Why is it important that users cannot modify their cookies?
+Cookies generally are where authentication and other sensitive, useful data goes.  It's important that these are protected by XSS attacks and 
+script injection, so modern browsers make it difficult to modify cookies, as well as allow prevention of JS access to cookies
+
+When are cookies sent to the server?
+Valid cookies for a page are sent at _every_ request made to a page in the same domain.
+
+localStorage vs. sessionStorage
+the difference is that sessionStorage does not persist and is only available for the duration of the browser session.  However,
+it does survive page reloads.
+
+It is not a good idea to store secure or sensitive data in sessionStorage or localStorage - these can be easily read and modified by the
+client
+
+Modern browsers prevent access to cookies from Javascript as a protection from XSS attacks and script injection by setting an HTTP only flag
+
+

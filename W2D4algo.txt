@@ -1,0 +1,30 @@
+What is an optimal substructure? When might a problem have one?
+
+Well, what is an optimal substructure:
+If the problem can be solved using the optimal solutions of the subproblems
+
+An example of this is the shortest path problem - all extended shortest paths will be made up of shortest paths for smaller problems
+The Longest Path problem does NOT have optimal substructure - you are not guaranteed to have your longest path be made of previous longest
+paths
+
+Binomial Coefficients:
+A binomial coefficient C(n, k) is defined as the coefficient of x^k in the expansion of (1 + x)^n
+
+This is also the number of ways you can choose k objects out of n objects
+
+
+The formula is the formula for Pascal's triangle - C(n,k) = C(n-1, k-1) + C(n-1, k)
+C(n, 0) = C(n, n) = 1
+
+Naive solution
+def binomial_coef(n, k)
+  if (k == 0 || k == n)
+    return 1
+  end
+
+  return binomial_coef(n-1, k-1) + binomial_coef(n-1, k)
+end
+
+With DP tho:
+Store an array C[][]
+

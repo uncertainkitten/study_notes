@@ -1,0 +1,49 @@
+What is the danger of an XSS?
+The danger of an XSS is that your browser could be used to execute malicious code for stealing identity or other sensitive information that is
+stored in your browser, via exploiting a website you are visiting.
+
+A Cross Site Scripting attack is where an attacker can inject malicious scripts into a legitimate website or web application
+The risk is when a web application makes use of of unvalidated or unencoded user input within the output it generates
+
+An attacker usually exploits a vulnerability within a website or application that then proceeds to utilize the website to deliver a malicious
+script to the victim.
+
+XSS can be taken advantage of in Flash, VBScript, and ActiveWX, but is most frequently used with JavaScript.
+
+The first step is for an attacker to find a way to inject a payload into a site that the user visits.  
+
+For example, lets say a server prints the latest comment in a way like this:
+```print "<html>"
+print "<h1>Most recent comment</h1>"
+print database.latestComment
+print "</html>"```
+
+Because the user input is being displayed, an attacker could make a comment such as
+```<script>doSomethingEvil();</script>.```
+
+And if the database doesn't sanitize input, the injection will execute - users visiting the web page will be served
+```<html>
+<h1>Most recent comment</h1>
+<script>doSomethingEvil();</script>
+</html>```
+
+So what's the worst an attacker can do with JS?  An attacker has access to all the same objects the rest of the webpage has - including cookies.
+An attacker could grab session tokens and thusly impersonate a user
+
+An attacker can read and make arbitrary modifications to the DOM, which is kind of an endless world of fun attacks on the user
+
+JavaScript can use XMLHttpRequest to send HTTP requests with arbitrary content to arbitrary destinations.
+
+JavaScript in modern browsers can leverage HTML5 APIs such as accessing a user’s geolocation, webcam, microphone
+and even the specific files from the user’s file system. While most of these APIs require user opt-in,
+XSS in conjunction with some clever social engineering can bring an attacker a long way.
+
+XSS needs 3 actors - the website, the victim, and the attacker
+1. The attacker needs to inject a malicious script using a vulnerable form
+2. The victim requests the webpage from the website
+3. The website serves the victim's browser page with the attacker's payload as part of the HTML body
+4. The victim's browser executes the code within the malicious HTML
+
+Tags that can execute XSS attacks:
+<script>, <body (w/ attributes like onload or background)>, <img>, <iframe>, <input>, <link>, <table>, <div>, <object>
+

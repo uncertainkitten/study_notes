@@ -1,0 +1,34 @@
+Discuss 4 differences between ES5 and ES6 that you find important
+Block scope - prevents unintuitive behavior from variables and prevents needing to use workarounds to avoid polluting global scope
+
+Lexical "this" - forces "this" to point at the object it is physically located within
+
+"arguments" - creates Rest parameters you can define with ...$nameOfArgs which is an array, as opposed to the array-like object "arguments" is
+
+Classes - ES6 class syntax makes it a lot more intuitive to handle JS's constructor/prototype/inheritance system
+
+ES5 vs. ES6
+1. Block Scope
+ES5 only had function level scope (wrap things in function to create scope)
+ES6 has "block"-level scoping (using curly braces to scope, things like let and const not being hoisted out of scope)
+ES6 doesn't allow duplicate variable declaration with let or const
+ES5 uses IIFEs to protect global scope - ES6 lets us use block scope (or let and const)
+Babel handles conversion from ES6 to ES5
+ES6 makes it trivial to use functions in for loops - in ES5, if you tried to access the looping variable in a function, you'd have trouble
+because of hoisting - ES6 "let" allows you to safely access it
+
+Lexical "this" (arrow functions)
+Forces "this" to point at the object it is physically located within
+
+Dealing with "arguments"
+In ES5, "arguments" acts like an array but is not an array.  ES6 gives us Rest parameters, represented by something like "...args". Rest parameters
+ARE an array and can be used with them
+
+Classes
+Conceptually, classes don't exist in JS - however, function constructors are often treated as if they are classes
+ES6 allows for class syntax to more intuitively access things like prototypes and constructor functions and such
+
+Strict Mode
+ES6 extensively uses strict mode, while in ES5 it was optional
+
+

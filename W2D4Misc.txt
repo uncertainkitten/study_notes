@@ -1,0 +1,24 @@
+Reducer composition with Arrays - you can extract out another method to create the desired state so that you are able to update the array without
+mutating it
+
+Reducer composition with Objects - you can combine reducers to create different state objects that get mixed together on a higher level reducers
+
+how combineReducers works - you define the slice of state that will be updated by a given reducer, and then provide the reducer that will manage that
+slice of state.  CombineReducers will in fact combineReducers such that you reform all of your state.  Convention is to name your reducers after the 
+keys in state that they manage
+
+Implementing combineReducers from scratch:
+const combineReducers = (reducers) => {
+  return(state = {}, action) => {
+    return Object.keys(reducers).reduce(
+      (nextState, key) => {
+        nextState[key] = reducers[key](
+          state[key],
+          action
+        );
+        return nextState;
+      },
+      {}
+    );
+  };
+};

@@ -1,0 +1,17 @@
+What is event delegation?
+
+Event delegation is the idea that, if we have a bunch of elements listening for events that will get handled in a similar way, then we can put the
+event listener on a common ancestor. In the handler, we set event.target to specify where we want the event handled.
+
+---------------
+Event delegation is the idea that, if we have a bunch of elements listening for events that will get handled in a similar way, then we can put the
+event listener on a common ancestor.  In the handler, we set event.target to specify where we want the event handled.  
+
+So instead of putting an onClick on each an every element in a list or a table, you can put it on the parent element for the entire thing - and then
+cause whatever you want to happen to happen to event.target, because that information will still be recorded.
+
+The drawback?  There might be elements within your subelements that get clicked, and you don't want the event to ONLY happen to that subelement (like
+a p tag), you want it to happen to the table entry, or the list item.  You can use conditionals to handle this, however - if you are looking
+for a specific tag, then you make sure that it only triggers when event.target is that tag
+
+Additionally, you can set "data-action" to have different elements do different things 
