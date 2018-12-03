@@ -1,0 +1,54 @@
+What are the steps of a try..catch block in Javascript?
+1. The code in try.. is executed
+2. If there are no errors, the catch callback is ignored
+3. If there are errors, try execution is stopped and catch execution begins - the callback takes in an err variable which contains the err object
+and can be accessed in the catch block.
+
+What type of errors to try..catch blocks work for?
+They work for runtime errors
+
+When creating a custom error, what attributes should it have?
+It should have message, name, and ideally stack, as well as anything else you might want to add.
+
+Error handling in JS
+
+try..catch
+If you have an error in a program, usually the program stops and prints the error to console
+However, you can keep the script running using try..catch blocks, to do something more reasonable if it catches the error
+
+Steps:
+1. First, the code in try... is executed
+2. If there are no errors, the code in the catch callback is ignored.
+3. If an error occurs, try execution is stopped and catch execution begins - the err variable contains the error object and can be accessed in the
+catch block.
+
+Try..catch only works for runtime errors - i.e., it won't work for syntax errors
+Try..catch only works synchronously - it won't work for async code.
+
+Error Object:
+has the properties Name and message.
+Some of the nonstandard properties include:
+stack (call stack trace)
+
+
+The throw operator:
+Throw throws an error object if the code would normally run but something is missing for the purposes of what we're trying to do (or otherwise malformed)
+You can throw any type of object as an error object, but it's usually help to have a name and a message
+
+Rethrowing errors:
+Catch should process all the errors it knows, and "rethrow" all other errors.
+
+Finally operator:
+Runs code under the operator in all cases.  This is often used if something is started before the try..catch block and needs to be finalized regardless
+of outcome.
+
+Custom errors and extending error:
+You want your errors to have basic error properties such as name, message, and ideally stack
+You usually also want to extend error to make use of instanceof error
+Let's say you're trying to validate user input, you might want to create a ValidationError
+It should inherit from the built in Error class, and you might want to change the name property.  
+You might create VAlidationError as a general class, and have more specific sub errors extending ValidationError, such as PropertyRequiredError
+
+You want to wrap exceptions so that there is a class one level above the specific error that can be easily called, rather than trying every individual
+error.
+
