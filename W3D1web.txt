@@ -1,0 +1,26 @@
+What is an XMLHttpRequest?
+
+Essentially, a Javascript object meant to handle requests and serve responses in ways that don't require updating the entire DOM synchronously
+
+
+AJAX - not a programming language, allows you to access servers from a webpage, stands for Asynchronous Javascript and XML
+
+AJAX is a combination of: a built-in browser XMLHttpRequest request object, Javascript, and HTML DOM
+So what is an XMLHttpRequest? 
+An XMLHttpRequest is a Javascript object with the following properties:
+onreadystatechange (Event Handler called when the ready state changes)
+readyState(an unsigned, short representation of the state of the request)
+response(an array buffer, blob, document, javascript object, or DOMString response sent by the server to the request)
+responseText(a DOMString containing the response to the request)
+responseType(enumerated value that defines the response type)
+responseURL(serialized URL of the response)
+responseXML(returns a Document containing the response to the request)
+status(unsigned short with the status of the response to the request)
+statusText(contains the full text of the status of the response to the request)
+timeout(unsigned long indicating how many ms can pass before the request is terminated)
+ontimeout(Event Handler called if the request times out)
+withCredentials(Boolean representing whether cross-site Access-Control requests should be made using creds such as cookies or auth headers)
+
+Useful notes: if XML is sent back instead of static HTML, you must set response headers to work in IE.
+If you don't set Cache-Control: no-cache, the browser will cache the response and never re-submit the request - this can make debugging challenging
+if httpRequest is used globally, functions calling makeRequest() can overwrite each other, creating race conditions 

@@ -1,0 +1,63 @@
+What are the constraints of (any type of) Heap?
+Two constraints:
+The shape must be complete (all levels of the tree are filled except the very last)
+The order must be correct (either every parent node is greater than/equal to child nodes, or less than/equal to child nodes)
+
+What type of Data Structure might we use to implement a heap?
+We would use an array, given one of the primary uses for heaps is creating priority queues
+
+What is the formula for getting the left child of a Heap root node? Right child?
+For the left child - 2i + 1
+For the right child - 2i + 2
+
+What is a Priority Queue?
+A priority queue is a queue with additional properties where:
+1) each item has a priority associated with it (usually an integer)
+2) An item with high priority is dequeued before an item with lower priority
+3) Two items of equal priority are dequeued based on their order entering the queue
+
+
+
+Let's learn about heaps
+A heap is a binary tree with two special properties - it must have all nodes in a specific order, and its shape must be complete
+
+The constraints are thus - the shape must be complete, meaning all levels of the tree are completely filled except the lowest level
+The order of the nodes follows the following rule - a parent node must be _either_ greater than or equal to the value of its children nodes, OR
+it must be less than or equal or to the value of its children nodes
+
+A min heap is one in which every parent node is less than or equal to the value of its children nodes
+A max heap is one in which every parent node is greater than or equal to the value of its children nodes
+
+How to add or extract from a heap:
+If you add to a heap, you can only ever add a node to the leftmost available spot on the lowest level of the tree.  After that, you need to check
+if the new node violates the order of the tree - if it does (by comparing it with the parent node), you need to swap the parent and child node, and 
+continue doing that until the order is back to correct
+
+When removing an element, you only can really extract the root node - you extract the root node, first by swapping it with the rightmost node on the
+bottom level, and then swapping the rightmost element downward until the order of the tree is restored.
+
+You can represent a heap with an array:
+Since we know where a given element in a binary tree will be, we can set all nodes in relation to their parent nodes:
+Root node: idx 0
+Children nodes: idx 1, idx 2
+Children of idx 1: idx 3, 4
+Children of idx 2: idx 5, 6
+Children of idx 3: idx 7, 8
+Children of idx 4: idx 9, 10
+etc.
+
+Note the pattern is - Parent is found at: idx / 2, and idx / 2 - 1 (with integer division)
+Alternatively, (idx - 1) / 2 and (idx - 2) / 2 for consistency could work
+In reverse, a parent's children are at 2i + 1 (left) and 2i + 2 (right)
+
+Why use an array?  Because you want to implement a priority queue.  What is a priority queue?
+Well, a priority queue is a queue which has additional properties:
+1) each item has a priority associated with it (usually an integer)
+2) An item with high priority is dequeued before an item with low priority
+3) Two items of equal priority are dequeued based on their order entering the queue
+
+Binary Heaps let you implement priority queues easily because the root node is always the highest priority node
+
+So, time complexity of finding a max/min element in a heap - O(1)
+Extraction and insertion - O(log(n))
+

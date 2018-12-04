@@ -1,0 +1,42 @@
+What's the difference between the DOMContentLoaded and load event triggers?
+DOMContentLoaded guarantees the HTML has been fully loaded and the DOM tree is built - load guarantees that _all_ resources, including
+external resources like images have been loaded.
+
+Well first, lets find out about event types:
+Resource events (includes: cached, error, abort, load, beforeunload, unload)
+Network events (includes: online, offline)
+Focus events (includes: focus, blur)
+Websocket events (includes: open, message, error, close)
+Session history events (includes: pagehide, pageshow, popstate)
+CSS Animation events (includes: animationstart, animationend, animationiteration)
+CSS Transition events (includes: transitionstart, transitioncancel, transitionend, transitionrun)
+Form events (includes: reset, submit)
+Printing events (includes: beforeprint, afterprint)
+Text Composition events (includes: compositionstart, compositionupdate, compositionend)
+View events (includes: fullscreenchange, fullscreenerror, resize, scroll)
+Clipboard events (includes: cut, copy, paste)
+Keyboard events (includes: keydown, keyup, keypress)
+Mouse events (includes: auxclick, click, contextmenu, dblclick, mousedown, mouseenter, mouseleave, mousemove, mouseover, mouseout, mouseup, pointerlockchange,
+pointerlockerror, select, wheel)
+Drag and Drop events (includes: drag, dragend, dragenter, dragstart, dragleave, dragover, drop)
+Media events (includes: audioprocess, canplay, canplaythrough, complete, durationchange, emptied, ended, loadeddata, loadedmetadata, pause, play,
+playing, ratechange, seeked, seeking, stalled, suspend, timeupdate, volumechange, waiting)
+Progress events (includes: abort, error, load, loadend, loadstart, progress, timeout)
+Storage events (includes: change, storage)
+Update events (includes: checking, downloading, error, noupdate, obsolete, updateready)
+Value change events (includes: broadcast, CheckboxStateChange, hashchange, input, RadioStateChange, readystatechange, ValueChange)
+Uncategorized events (includes: invalid, localized, message, message, message, open, show)
+
+Lifecycle of HTML page:
+DOMContentLoaded, load, beforeunload/unload
+DOMContentLoaded - Browser has fully loaded HTML, DOM tree is built, but external resources may not have loaded
+load - the browser loaded all resources
+beforeunload/unload - when the user is leaving the page
+
+The difference and use cases are as follows:
+
+DOMContentLoaded event – DOM is ready, so the handler can lookup DOM nodes, initialize the interface.
+load event – additional resources are loaded, we can get image sizes (if not specified in HTML/CSS) etc.
+beforeunload/unload event – the user is leaving: we can check if the user saved the changes and ask them whether they really want to leave.
+
+Special notes: DOMContentLoaded can only trigger _after_ all scripts have executed - exceptions are external scripts with async or defer attributes
