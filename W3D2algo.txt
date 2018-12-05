@@ -1,0 +1,32 @@
+Explain the pseudocode for Merge Sort
+First you split the arrays in half around the middle, and define a left and right array
+You then recursively call the split until all the arrays are one or zero elements
+Then you use a sort helper method to compare each of the arrays (which should have one element)
+Then you start putting them back together until you get the array back, sorted
+
+
+What is the runtime of merge sort?
+Between 0.5 and 1 O(n(log(n)))
+
+
+
+Pseudocode for merge sort:
+# split in half
+m = n / 2
+
+# recursive sorts
+sort a[1..m]
+sort a[m+1..n]
+
+# merge sorted sub-arrays using temp array
+b = copy of a[1..m]
+i = 1, j = m+1, k = 1
+while i <= m and j <= n,
+    a[k++] = (a[j] < b[i]) ? a[j++] : b[i++]
+    → invariant: a[1..k] in final position
+while i <= m,
+    a[k++] = b[i++]
+    → invariant: a[1..k] in final position
+
+Merge sort is, well, merge sort.  But, cool facts - Ruby sort uses insertion sort below 13 elements, and merge sort above 13 elements
+Also Timsort exists, which is a combination of insertion sort and merge sort based on runs of already sorted elements (with minrun being between 32 and 64)

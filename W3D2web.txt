@@ -1,0 +1,24 @@
+What are the advantages and disadvantages of NoSQL databases vs. SQL databases?
+Advantages of NoSQL - usually very fast, very available, handles complex queries better.  also can be very quick to set up
+Disadvantages of NoSQL - usually less consistent, requires more expertise, doesn't work well with ACID (so ungreat for financials)
+
+Well, NoSQL was made around 12 years ago for a reason - people wanted to make more complex queries and get more inference out of their data, and 
+the data itself became more complex.  SQL also had situations where complying with ACID standards and making sure that records would lock when they 
+were requested to prevent untoward changes meant that "web scale attacks", i.e., a ton of attempts to read data from millions of users, would lead to 
+database information being unavailable.  So, while this standard is still necessary for financial transactions, you can be a bit more sloppy with less
+critical things - it's ok if wrong data displays for a few moments.
+
+NoSQL is sometimes arranged with key-value structure, columnar structure.  High speed databases that borrow from SQL are occasionally referred to as
+NewSQL
+
+Hadoop - collects a ton of data, runs MapReduce on it, makes it real cheap to analyze the data.  It looks like Hadoop changes "here's the data and how
+to relate it - figure out how to ask me" of SQL into "Here's a bunch of data, what's an interesting relation"
+
+MongoDB - documents and key value pairs, tends to be much faster to get up and running and to key into
+
+CouchBase - good for inconsistent demand, follows CAP principle (Consistency, Availability and Partitionability) and opts for Consistency
+and Partitionability
+
+
+
+
