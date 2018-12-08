@@ -1,0 +1,20 @@
+What are the issues one may face when scaling horizontally?
+Often involves downtime to add machines to the array
+Redundancy becomes much more important, since you have to distribute requests to make use of the system
+You have to deal with consistency issues and making sure that data propogates properly throughout your system array
+
+
+What is Vertical Scaling?
+Vertical scaling is making a more powerful machine as your single node for your data.
+
+Horizontal scaling - add moar machines to your pool!
+Vertical scaling - maek better machine, add moar power!
+
+Database scaling horizontally generally involves partitioning the data. Scaling vertically usually means having all the data reside on a single node
+with a lot of power.  Horizontal scaling allows for more dynamic scaling, whereas vertical scaling is limited by ceilings on machine power
+
+In-Memory data grids are optimized for both horizontal and vertical scaling due to not being bound to disk.
+
+
+
+

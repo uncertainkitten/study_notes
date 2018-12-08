@@ -1,0 +1,39 @@
+What is the time complexity of Bubble Sort? What are the steps for this algorithm?
+1. Iterate a number of times equal to the array's length
+2. Within each iteration, iterate over the array
+3. Swap values in each iteration
+4. Stop when there are no swaps
+
+time complexity is O(n^2)
+
+Describe when it may be ideal to utilize Bubble Sort
+You can use it for k_largest_elements in an array since you know the largest elements in each iteration will end at the end of the array
+
+
+Algo:
+for i = 1:n,
+    swapped = false
+    for j = n:i+1,
+        if a[j] < a[j-1],
+            swap a[j,j-1]
+            swapped = true
+    → invariant: a[1..i] in final position
+    break if not swapped
+end
+
+Steps:
+1. Iterate a number of times equal to the array's length
+2. Within each iteration, iterate over the array
+3. Swap values in each iteration
+4. Stop when there are no swaps
+
+Use case for bubble sort?
+k_largest(smallest)_elements in array
+
+Method 1 (Use Bubble k times)
+1) Modify Bubble Sort to run the outer loop at most k times.
+2) Print the last k elements of the array obtained in step 1.
+
+Time Complexity: O(nk)
+
+This works because each iteration guarantees the largest element is at the end of the array

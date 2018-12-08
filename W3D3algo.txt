@@ -1,0 +1,27 @@
+What is the time-complexity of Heap Sort?
+Time complexity of heap sort is O(n(log(n))) - you can do a build heap operation in O(n) time by working bottom up, and sorting a heap is log(n)
+because the heap structure makes extracting a value constant time, and redistributing the tree a binary search log(n) operation
+
+What are the steps for Heap Sort?
+Step 1: Have an unsorted array, turn it into a maxheap
+Step 2: Once it is a heap, start with the max element and swap it with the last element in the heap
+Step 3: Extract the max element, heapify the top element down to it's proper place
+And then rinse and repeat until you have sorted array
+
+
+For heap sort, we usually use a BinaryMaxHeap
+
+So, how do we use this?
+Step 1: Have an unsorted array, turn it into a maxheap
+Step 2: Once it is a heap, start with the max element and swap it with the last element in the heap
+Step 3: Extract the max element, heapify the top element down to it's proper place
+And then rinse and repeat until you have sorted array
+
+Now, the reason we want a max heap is because "removing the element from the array" doesn't actually mean removing it from the array
+The thing you actually do is put it at the end and stop considering it as part of the heap
+i.e. You might have [19, 14, 7, 8, 3, 1], and then you do a heapify down, and get [1, 14, 7, 8, 3, 19].  The heap is now [1, 14, 7, 8 , 3], and is
+considered to stop at index 4, rather than 5
+(actually the heap is [14, 7, 8, 3, 1] but details)
+
+Ways to make heapify O(n) - you can start from the bottom, and heapify up after skipping half the nodes
+

@@ -1,0 +1,79 @@
+What are the steps for Counting Sort? What is the time complexity?
+Time complexity: O(n) (it's non-comparison)
+Steps:
+1. Create a count array to store the count of each unique object
+2. Modify the count array such that each element at that index stores sum of previous counts
+3. Iterate through the original array again, keying into the count array at the element, and placing the element at the index (-1) of the count
+
+
+Counting sort - sorting technique based on keys between a specific range - counts the values of keys in a specific range and uses arithmetic to
+calculate the position of each object in the output sequence.
+
+Steps:
+1. Create a count array to store the count of each unique object
+(i.e., given array [1, 4, 1, 2, 7, 5, 2] and range (1-9), get [0, 2, 2, 0, 1, 1, 0, 1, 0, 0]
+2. Modify the count array such that each element at that index stores the sum of previous counts
+[0, 2, 4, 4, 5, 6, 6, 7, 7, 7]
+3. And now the modified count array indicates each index/key's position in the sorted array - so output each object followed by decreasing its count
+by one.  (position of 1 is 2, position of 2 is 4, position of 4 is 5, position of 5 is 6, position of 7 is 7, and subtract 1 for 0 index)
+OH wait I'm dumb, you iterate through the ORIGINAL ARRAY again.
+[1, 4, 1, 2, 7, 5, 2]
+count[1] = 2 (-1 for index), now count[1] = 1
+[0, 1, 0, 0, 0, 0, 0]
+count[4] = 5 (-1 for index), now count[4] = 4
+[0, 1, 0, 0, 4, 0, 0]
+count[1] = 1 (then becomes 0)
+[1, 1, 0, 0, 4, 0, 0]
+count[2] = 4 (becomes 3)
+[1, 1, 0, 2, 4, 0, 0]
+count[7] = 7 (becomes 6)
+[1, 1, 0, 2, 4, 0, 7]
+count[5] = 6 (becomes 5)
+[1, 1, 0, 2, 4, 5, 7]
+count[2] = 3 (becomes 2)
+[1, 1, 2, 2, 4, 5, 7]
+Hey look sorted array
+
+# The main function that sort the given string arr[] in  
+# alphabetical order 
+def countSort(arr): 
+  
+    # The output character array that will have sorted arr 
+    output = [0 for i in range(256)] 
+  
+    # Create a count array to store count of inidividul 
+    # characters and initialize count array as 0 
+    count = [0 for i in range(256)] 
+  
+    # For storing the resulting answer since the  
+    # string is immutable 
+    ans = ["" for _ in arr] 
+  
+    # Store count of each character 
+    for i in arr: 
+        count[ord(i)] += 1
+  
+    # Change count[i] so that count[i] now contains actual 
+    # position of this character in output array 
+    for i in range(256): 
+        count[i] += count[i-1] 
+  
+    # Build the output character array 
+    for i in range(len(arr)): 
+        output[count[ord(arr[i])]-1] = arr[i] 
+        count[ord(arr[i])] -= 1
+  
+    # Copy the output array to arr, so that arr now 
+    # contains sorted characters 
+    for i in range(len(arr)): 
+        ans[i] = output[i] 
+    return ans  
+
+
+Notes on counting sort:
+1. efficient if range of input data does not greatly exceed number of objects to be sorted
+2. Runtime is O(n) proportional to the data range
+3. Often used as a subroutine to things like radix sort
+4. Counting sort uses partial hashing to count the occurrence of the data object in O(1)
+5. Can be extended to work for negative inputs
+

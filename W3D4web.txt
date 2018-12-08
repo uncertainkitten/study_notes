@@ -1,0 +1,36 @@
+SQL vs. NoSQL:
+More precisely, what is SQL?
+Databases written in a "Structured Query Language" and organize data based on relations - a SQL database contains two or more tables, Structured
+with columns and rows.  Each row represents an entry, and each column represents a specific type of information
+
+Emphasis is on building solid schemas and planning ahead
+
+One of the main strengths of SQL is JOINs, allowing you to grab related data from two or more tables
+
+Popular SQL dbs:
+MySQL, Oracle, IMB DB2, Sysbase, MS SQL Server, Microsoft Azure, MariaDB, PostgreSQL
+
+What is NoSQL?
+Much more flexible - if you don't have a structure to your data or aren't sure about what your future requirements will be, might work well
+NoSQL is document based - you store data in documents.  The data can be easily found but isn't necessarily categorized.  This takes longer to process
+and has more space requirements, but is more intuitive
+
+NoSQL data is also much, much easier to access
+
+
+Types of NoSQL:
+Key-Value Store: High performance, high scalability, high flexiblity, no complexity - examples (Cassandra, Azure, LevelDB, Riak)
+Column Store: High performance, high scalability, moderate flexibility, low complexity - examples (BigTable, HyperTable, HBase)
+Document: High Performance, variable(high) scalability, high flexibility, low complexity - examples (MongoDB, CouchBase)
+Graph database: Variable performance, variable scalability, high flexibility, high complexity - examples (Polyglot, Neo4J)
+
+Reasons to use a SQL database:
+You need to ensure ACID compliancy (Atomicity, Consistency, Isolation, Durability)
+Your data is structured and unchanging
+
+Reasons to use a NoSQL database:
+Storing large volumes of data with little to no structure
+Making the most of cloud computing and storage
+Rapid development
+
+

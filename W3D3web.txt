@@ -1,0 +1,39 @@
+When are two pages considered to have the same origin?
+Two pages are considered to have the same origin if the protocol, the port, and the host are the same
+
+How might you allow cross-origin resource sharing?
+You can allow it by having a CORS policy in place, or not using CSRF tokens (don't do this)
+
+What is CORS?
+CORS is Cross-Origin Resource Sharing
+
+What the fuck is a same origin policy?
+Well - it's a security policy that restricts how a document/script from one origin is permitted ot interact with a resource from another origin
+Two pages have the SAME origin if: the protocol, the port, and the host are the same.  (referenced as scheme/host/port tuple)
+
+Things: Origins can be inherited from scripts executed from pages with an about:blank or a javascript: URL
+
+IE screwing things up like usual:
+Trust zones - if two domains are in a "high trust zone", same-origin limitations are not applied
+Port - IE doesn't check port for same origin checks
+
+You can _sort_ of change origins, via setting document.domain to the current domain or a superdomain of the current domain.  You can't spoof another
+site's origin this way.  Any document.domain call sets the port to "null"
+
+cross-origin network access: Cross-origin _writes_ are typically allowed (links, redirects, form submissions)
+cross-origin embeds are usually allowed (scripts, css, images, media, plugins, @font-face, frame/iframe)
+cross-origin reads are typically DISALLOWED, though read access can be leaked by embeddding.
+
+A CORS (cross-origin resource sharing) policy can cross-origin access
+How to block cross-origin access:
+CSRF tokens can prevent cross-origin writes
+Prevent cross-origin reads by preventing embedding of resources
+To prevent cross-origin embeds, ensure that your resource cannot be interpreted as one of the embeddable formats.  CSRF tokens can also prevent embedding
+
+Cross origin data storage access:
+localStorage and IndexedDB: not cross origin touchable
+Cookies: Pages can set cookies for own domain or parent domain, as long as parent domain is not a public suffix
+Writing cookies allow you to set: Domain, Path, Secure, and HTTP-only flags
+Reading cookies: You can't see from where it was set
+
+
