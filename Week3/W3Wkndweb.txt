@@ -1,0 +1,10 @@
+What is a Load Balancer?
+A load balancer is a device or program intended to distribute requests to a distributed a system
+
+What are some examples of Horizontal Scaling?
+Really anything that involves adding more machines to your system:  server farms and the like
+
+What is Moore's Law?
+The number of transistors in a dense integrated circuit doubles roughly every 2 years.
+
+see sysdesignprimer.txt for all of my notes on this lecture.

@@ -1,0 +1,10 @@
+Discuss the differences between let, const, and var. What are their respective scopings?
+Var: function-scoped, hoisted to the top of scope
+Let, const: block-scoped, a pair of curly braces defines the scope in which they are defined.
+
+Before ES6 - could only dec variables with var
+variables were function-scoped
+Within block-scopes (like conditionals), vars can be accessed outside the conditional
+Undeclared variables automatically create a var in the global scope.
+
+

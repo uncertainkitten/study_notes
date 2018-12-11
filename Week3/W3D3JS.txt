@@ -1,0 +1,17 @@
+What happens when you enable strict mode in javascript?
+No undeclared variables, makes it easier to write "secure" JavaScript, turns bad syntax into real errors, and generally protects things from happening
+"silently" that might just be typos or bad practice
+
+How does the rest/spread operator work in JS?
+. . . syntax means: gather the remaining parameters into an array
+Whatever is after ... is the variable the array is stored in
+Spread operator - expands a rest operator into the list of arguments
+
+
+
+Well first, things JS does with args: argN - returns greatest of the arguments, Object.assign(dest, src1...srcN) copies properties from src1 to srcN into
+dest.
+
+So summary:
+When ... is at the end of function parameters, it’s “rest parameters” and gathers the rest of the list of arguments into an array.
+When ... occurs in a function call or alike, it’s called a “spread operator” and expands an array into a list.

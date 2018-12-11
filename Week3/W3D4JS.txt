@@ -1,0 +1,4 @@
+What is the syntax for passing arguments to the bind function?
+
+Well, first, what's the problem?  Why bind?
+Well - turns out, you can lose "this" with async stuff.

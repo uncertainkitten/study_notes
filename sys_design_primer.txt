@@ -68,6 +68,40 @@ LVS
 Hardware:
 Various companies charge a ton for load balancer machines
 
-Well, let's continue from 46:29 NEXT TIME: https://www.youtube.com/watch?v=-W9F__D3oY4
+Continuing from 46:29
+Sticky sessions: Cookies could solve sticky sessions, so that you end up on the same backend server whenever you access a web page that hooks into
+a distributed system.  Restrictions: Cookies don't have that much room - counter: You could store the server ID in the cookie.  Issues?  What if the IP
+changes?  Also, it seems a bit unnecessary to reveal your IP schema to the world.  Alternatively, you could store a _session token_ or something like that
+that the load balancer interprets to route the request correctly
 
+PHP acceleration:
+APC (Alternative PHP Cache)
+eAccelerator
+XCache
+Zend platform
+
+You can have the first visit to a site do the full PHP interpretation, but you could afterwards cache PHP authentication so that it's faster in the
+future (until you change things)
+
+Caching in general!
+.html, MySQL Memory Cache, memcached, etc.
+
+Craigslist: Note that it takes in user input and serves it up as an html file, as opposed to storing the information on a server and serving up the page
+dynamically.  This is unusual - it appears that they just flat out store/cache the HTML file they generate and serve it up super fast
+
+There are performance benefits to be had from serving static content - but some of the drawbacks are disk space (though, likely more reads than writes)
+There's also a lot of unnecessary redundancy in terms of boilerplate that is just stored over and over. But one of the biggest issues? Changing the
+aesthetics of the site is _almost impossible_, because you have thousands and thousands of static pages that would need to be rebuilt to conform
+to the new theme.
+
+So, MySQL Query Cache - how does this work?
+First time you execute a query, it's slow, but from there, MySQL can cache results and serve those up.
+
+Memcached: Runs on a server, caches whatever you want in RAM.  Like, you can cache queries, or you could cache other things too
+
+Using caches instead of always hitting databases allows you to get much better performance, but caching is fairly limited - it can run out of space
+
+
+
+Well, let's continue from 1:04:47 NEXT TIME: https://www.youtube.com/watch?v=-W9F__D3oY4
 
