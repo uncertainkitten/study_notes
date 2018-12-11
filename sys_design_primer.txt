@@ -68,7 +68,6 @@ LVS
 Hardware:
 Various companies charge a ton for load balancer machines
 
-Continuing from 46:29
 Sticky sessions: Cookies could solve sticky sessions, so that you end up on the same backend server whenever you access a web page that hooks into
 a distributed system.  Restrictions: Cookies don't have that much room - counter: You could store the server ID in the cookie.  Issues?  What if the IP
 changes?  Also, it seems a bit unnecessary to reveal your IP schema to the world.  Alternatively, you could store a _session token_ or something like that
@@ -101,7 +100,15 @@ Memcached: Runs on a server, caches whatever you want in RAM.  Like, you can cac
 
 Using caches instead of always hitting databases allows you to get much better performance, but caching is fairly limited - it can run out of space
 
+What happens when caches run out of space: You can expire objects based on when they are put in (hence, LRU caches)
+Things like Facebook are read heavy rather than write heavy - so caching works well
 
+Database optimizations: In memory tables - keep entire tables in memory
+archive storage engines - data you track but do not query often - pay costs on querying for fast write/efficient save
+Replication: making automatic copies of things - this is leader follower set up - this process is automatable (leader elections)
+Ways to take advantage of leader-follower - load balancing queries, distributing the majority of the work (which is read work) - leader follower
+is weaker in write heavy applications
 
-Well, let's continue from 1:04:47 NEXT TIME: https://www.youtube.com/watch?v=-W9F__D3oY4
+https://www.youtube.com/watch?v=-W9F__D3oY4&t=
+Continue from 1:14:38
 

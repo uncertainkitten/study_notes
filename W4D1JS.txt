@@ -1,0 +1,8 @@
+Does JS assign variables by value or by reference?
+
+Well, it depends.  Simple values (null, undefined, boolean, number, string, and ES6 symbol) are assigned by value
+Compound values(Objects, including arrays and functions) create a copy of the reference on assignment
+
+So, if you want to copy a compound _value_, you need to actually copy the entire thing
+
+

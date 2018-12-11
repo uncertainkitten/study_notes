@@ -1,0 +1,75 @@
+What is Round Robin DNS binding?
+You bind a DNS query to a given server in a server array so that people don't end up with inconsistent information or need to log into _each_ server
+
+What issue arises regarding sessions when implementing a Load Balancer?
+Your session token might be on server one, but server 2 or 3 don't have your session and you end up on those servers instead 
+at some point and are asked to log in again. Or other information might not be saved on all servers
+
+What is striping when talking about writing to a Hard drive?
+Concurrent writing to multiple hard disks whenever you save data
+
+What is RAID and what functionality can it give you?
+RAID is Redundant Array of Independent Disks:  It gives you striping, mirroring, or both functionality in order to introduce efficient redundancy
+into a multiple hard disk system
+
+What is a symbol when talking about transmitting data?
+A symbol is a state of a physical object that can be interpreted as a 1 or a 0 (or whatever else, there's probably some clever stuff that can be done)
+in order to transmit interpretable information
+
+How is information transmitted over wireless signal?
+It is transmitted via radio waves - you oscillate voltage in the antenna quickly and transmit waves, and those waves have a sine curve.  If you invert
+the sine wave, you get an alternate state, so you can get a 0 and 1 state from the inversion.
+
+Networking!
+How does an ethernet cable even work :O?
+4 pairs of copper wires, apply voltage to two of the wires, and use variances in the voltage to send information - say you vary it between
+0V and 5V - so you maybe have it send 0V for a second, and 5V for a second, and 0V for a second, etc.
+
+The term for these voltages is symbols, and you can assign numbers such as 0 and 1 to those symbols.
+The rate at which you send the signals is the symbol rate (baud is symbols per second)
+
+So in practice?  ASCII is a way of mapping these symbols to characters - so is Unicode
+
+So, what about Fiber optics?
+Fiber strand in the middle of the cable, which is a tube of thin glass coated in another layer of glass called cladding
+If you send laser light in through the cable, the refraction index will allow the light to travel through the cable
+So, how do you encode?  Light is off, light is on
+
+How does wireless work?
+Your symbol is radio waves - the antenna oscillates the voltage quickly, maybe at something like 2.4Ghz, and this will emit radio waves
+It will be a sine wave, and you can shift the phase a bit by inverting it, which gives you two modes to send ones and zeros
+
+So, say we have two computers and want to send info between them:
+Clock synchronization is an issue!  If the computers don't agree on the clock rate, then they'll garble the message (imagine trying to interpret morse
+code when you miss the first couple das or dits, or without knowing the rate at which dots and dits happen)
+So you can have a clock that just alternates 1s and 0s at the speed of transmission to confirm whether a 1 or 0 is being sent
+Well, when it messes up, it's called a clock slip
+
+Ways to sync - GPS antenna - allows you to synchronize to atomic clocks (disadvantages, need to mount an antenna to use this)
+Having atomic clocks in the computer itself, fairly uncommon though
+Another approach - send a separate signal to act as the clock, in addition to the actual data.  Problem with that is sufficiently fast data transmission
+can lead to clock phasing - also possible for the propogation of electrons to be _slightly_ slower on one or the other
+
+So a common solution?  Transmit the clock and the data on the same link, with additional symbols.
+If we set the symbol for 1 to be "the transition to 5 Volts" and the symbol for 0 to be the "transition to 0 Volts" - and then the clock symbol is
+5V and 0V
+The way the differentiation is done is that the transition between states is a longer phase than the clock going up or down - this is Manchester coding
+
+
+So, how is information encoded on a real network line?
+
+Ethernet is connected to a 10-base T that allows you transmit data at 10 Megabits per second (Though ethernet also supports 100-base TX (100 MBit per sec),
+as well as 1000 Base-T (1000 MBit per sec, or 1 GBit/sec)
+
+The 1000 Base-T is the only one that uses all four pairs of wires - 10 and 100 use 2 wires
+
+So, connected to an oscilloscope (which measures oscillations in voltage), we can see that stuff is happening and it is Manchester encoded
+
+Each division is 100 nanoseconds in the oscilloscope
+Symbol for 0 is a transition from a positive voltage to a negative voltage
+Symbol for 1 is a transition from a negative voltage to a positive voltage
+
+
+
+
+

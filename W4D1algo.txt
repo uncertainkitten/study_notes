@@ -1,2 +1,51 @@
 What are the constraints of a Binary Search Tree?
 What is the big O lookup time for a value in a binary search tree?
+How can you find the maximum depth of a BST?
+
+
+Scheduling and binary search trees
+Runway Reservation System problem:
+Assume an airport with a single runway - how do you schedule those fuckers safely
+This system is built for reservations, R, for future landings - so you have to be able to reserve requests for future landing time t
+Add t to the set R if no other landings are scheduled within k minutes
+
+Remove from set R as the plane lands - you would do this check at a regular interval to make sure that plane landings are removed
+And we want to do operations in O(log(n)) time
+
+Constraints - given k, no reservation can be made if it is less than k minutes from another reservation.  You cannot reserve a landing time in the past
+
+Data structures not to use:
+What can we do with an unsorted list?  Linear time for all operations
+What can we do with a sorted array?  You can use binary search to get O(log(n)) insertion, but the actual insertion is going to be linear time
+What about sorted list?  No binary search, even if you get constant time insertion
+What about heaps?  min/max has a weaker gradient, and your search time for a heap to find the elements around k will be linear time
+What about hashes?  Same issue as heaps - no good way to search
+
+So, BST: node(x): key(x)
+A Binary Search Tree has pointers, unlike a heap.
+Pointers: Parent(x)
+Invariant: For all nodes x, if y is in the left subtree of x, then key of y is <= key of x.  If y is in the right subtree, key(y) >= key(x)
+
+Ex:
+     30
+    /  \
+   17  40
+  /  \
+14    20
+
+Insert is O(log(n)) because you literally just compare the number to the root node, determine if you go left or right based on the result (greater than or
+less than) - and continue down until you get the number in the right place.  Therefore, insertion is O(height of tree), which is O(log2n)
+
+Given the additional constraint of the problem, you can also do the comparison to make sure that you're not within k of the parent node
+Which means you can reject an insertion if it violates the other constraint
+
+Finding min and max in a BST - also O(height of tree), because finding max is "go to the left" and finding min is "go to the right"
+
+Also, Augmented BSTs:
+New req: Calculate Rank(t) - how many planes are scheduled to land at times <= t
+
+First, we need to add more info to the node structure - augment BST structure - we're going to add a number that counts the numbers of nodes below the
+node in the structure
+
+Continue from 40:30: https://www.youtube.com/watch?v=9Jry5-82I68&t=
+
