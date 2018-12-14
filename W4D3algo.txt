@@ -1,0 +1,64 @@
+What is an AVL tree?
+An AVL tree is a self balancing Binary Search tree (Adelson-Velskii and Landis tree)
+
+How does it self balance?
+Using Rotation - if you rotate unbalanced nodes, and make sure your inserts follow the AVL property, you'll be able to adjust where the subtree heights
+differ
+
+Balanced BSTs: AVL trees (definitions, rotations, insert)
+other balanced trees
+data structs in general
+lower bounds
+
+Height - length of the longest path always going down
+
+Balanced tree - O(log(n))
+Height of an node: Length of longest path from a node to a leaf
+
+AVL trees keep track of the nodes (and as a general rule, if you can locally compute something, such as height of node, that info can be considered
+trackable for free (caching it I guess))
+
+To save special casing on height checks, you can start from -1
+
+AVL trees - require heights of left and right children of EVERY node to differ at most by +/- 1
+
+This can be maintained in log(n) time
+
+AVL tree constraints: balanced
+Worst case: right or left subtree has height one more than the left for every node
+Nh = 1 + Nh-1 = Nh-2
+
+Nh > Fibonaccih
+phi^h/sqrt(5) = Fibonacci
+phi^h/sqrt(5) < n
+h-- < philog(n)
+
+But, at most, it'll be 2log(n)
+
+So, how do we make an AVL tree?
+Insert and delete
+AVL insert:
+1) Basic BST insert
+2) Fix AVL property
+
+So first, check to see whether your AVL property is violated
+If it is, well, you need to use ~*~rotation~*~
+
+Left rotate - swap the node and its right child, then move the right child and all subtrees to the left
+Right rotate - reverses this thing
+
+So if you _are lacking_ a right child, you can put the parent node in the right child position, put left child in parent position, and if that
+left child had a left child, move it up to the left child of the new parent
+
+Double rotation - to handle a zig zag pattern, rotate to get into the straight position, then rotate into the balanced position
+
+Suppose it is not the lowest node x that is violating the AVL property (and lets assume right heavy AVL tree)
+
+Insert n items: O(n(log(n)))
+In order traversal: O(n)
+
+You can do a priority queue with an AVL tree, with insert, delete, and min operations.  If you also want in order traversal, we'd need AVL tree
+
+
+
+

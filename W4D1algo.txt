@@ -1,6 +1,15 @@
 What are the constraints of a Binary Search Tree?
+Invariant: For all nodes x, if y is in the left subtree of x, then key of y is <= key of x.  If y is in the right subtree, key(y) >= key(x)
+No more than two children per node
+
+
 What is the big O lookup time for a value in a binary search tree?
+O(h), which in a balanced tree would be O(log(n)), but without a guarantee of balance is only the tree height/depth
+
 How can you find the maximum depth of a BST?
+Max of the height of the children nodes + 1
+
+
 
 
 Scheduling and binary search trees
@@ -45,7 +54,17 @@ Also, Augmented BSTs:
 New req: Calculate Rank(t) - how many planes are scheduled to land at times <= t
 
 First, we need to add more info to the node structure - augment BST structure - we're going to add a number that counts the numbers of nodes below the
-node in the structure
+node in the structure.  So on insert, we'll add a value to the node, the "size" of the subtree.  Subtree size of nodes without children are 1.  If a node
+has two children with no children, it's 3.  If a node has children with children, it counts all the way down
 
-Continue from 40:30: https://www.youtube.com/watch?v=9Jry5-82I68&t=
+For a delete method, you have to move pointers.
+
+So, how does this help with rank(t)?  
+1. Walk down the tree to find the desired time
+2. Add in the nodes that are smaller
+3. Add in the subtree sizes to the left
+
+Traverse the tree, use the subtree counts, and add when you run into values smaller than the time
+
+
 

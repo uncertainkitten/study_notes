@@ -1,0 +1,39 @@
+Give a high level overview of how to implement a hash table.
+
+Hash Tables
+Combining the random access ability of the array with the dynamism of a linked list
+
+Insertion: theta(1)
+Deletion: theta(1)
+Lookup: theta(1)
+(theta is average case)
+
+Gain the advantages of both data structures, mitigating disadvantages
+Disadvantage of hash table is it's unordered/unsorted
+
+Hash Table combines:
+Hash function - returns a nonnegative integer value called a hash code
+Array - capable of storing whatever data types we wish to place in the structure
+
+Run the data through the hash function, then store the data in the element of the array represented by the returned hash code
+A good hash function should:
+Use only the data being hashed
+Use all of the data being hashed
+Be deterministic
+Uniformly distribute data
+Generate very different hash codes for similar data
+
+Hash collisions: What happens when two pieces of data yield the same hash code?
+Presumably, we want to store both pieces of data in the hash table, so we don't want to overwrite the data
+So - how do we get both elements in the table while preserving quick insertion and lookup?
+One approach: Linear probing - if a hash code is taken, add 1 until you find a free place - the drawback is that you end up with clustering: Once
+there is a miss, two adjacent cells contain data, making it more likely in the future that the cluster will grow
+Even if we switch to another probing technique, we're still limited.  We can only store as much data as we have locations in our array
+
+Another approach: Chaining
+What if, instead of each element of the array holding one piece of data, it held multiple pieces of data?
+If each element in the array is a pointer to the head of a linked list, then multiple pieces of data can yield the same hash code
+This approach eliminates clustering, allows for O(1) insertion, and the data is distributed across so many "buckets" that you only have to iterate
+through a small list for lookup.
+
+

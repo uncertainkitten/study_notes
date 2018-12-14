@@ -1,0 +1,65 @@
+Give a high level overview of how to implement a Linked List.
+You create a node, consisting of a pointer and a value.  Then, you initialize a LinkedList with a head node based off the starting value of the list.
+From there you want to be able to add, which is fairly simple, you iterate to the end of the list and add a new node (it would likely be more ideal
+to keep a tail instance variable and tack things on to the end).  Deletion is also simple, you iterate through trying to find the value you want to
+delete, and then connect the previous node to the next node, to remove the current node from the list. And lastly, if you want to see the whole list,
+you can iterate through and display the value of each node in order.
+
+Well, what is a linked list?
+A data structure that is a collection of nodes that represent a sequence.  Holds values and pointers to other nodes
+Pros: Dynamic, insertion and deletion is easy, easy to build linear data structures with them
+Cons: More memory intensive, need to access nodes sequentially, singly-linked lists are extremely difficult to traverse backwards (doubly linked lists
+are more memory intensive)
+
+For Ruby, you probably want two classes, a node and a linked list
+Code:
+```
+class Node
+  attr_accessor :val, :next
+
+  def initialize(val, next_node)
+      @val = val
+      @next = next_node
+  end
+end
+
+class LinkedList
+
+  def initialize(val)
+    @head = Node.new(val, nil)
+  end
+
+  def add(val)
+    current = @head
+    while current.next != nil
+      current = current.next
+    end
+    current.next = Node.new(val, nil)
+  end
+
+  def delete(val)
+    current.next = @head
+    if current.val = val
+      @head = current.next
+    else
+      while (current.next != nil) && (current.next.val != val)
+        current = current.next
+      end
+      unless current.next == nil
+        current.next = current.next.next
+      end
+    end
+  end
+
+  def return_list
+    elements = []
+    current = @head
+    while current.next != nil
+      elements << current
+      current = current.next
+    end
+    elements << current
+  end
+end
+```
+
