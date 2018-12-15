@@ -1,0 +1,9 @@
+What is database partitioning?
+If you segment the data you are storing on a given database tier, you can set things up so that you are distributing the load across multiple database
+tiers, which allows for more redundancy at the expense of having all your data in one place.
+
+Explain high availability and how it relates to the master-master paradigm
+High availability is the idea that if something fails, there is something to catch that failure and take over the duties of the failed hardware until
+the failed hardware can be fixed.  The Master-Master paradigm is an example of this because both databases are talking to each other and handling write
+requests, and also paying attention to whether the other one is still receiving packets - and if it stops, taking over all the requests so that the
+databases are still available

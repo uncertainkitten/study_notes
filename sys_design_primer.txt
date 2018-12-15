@@ -109,6 +109,29 @@ Replication: making automatic copies of things - this is leader follower set up 
 Ways to take advantage of leader-follower - load balancing queries, distributing the majority of the work (which is read work) - leader follower
 is weaker in write heavy applications
 
-https://www.youtube.com/watch?v=-W9F__D3oY4&t=
-Continue from 1:14:38
+Writes still have an SPOF in leader-follower, though.  You can fix this with a Master-Master setup, which allows you to propogate between the two masters
+The load balancer is also an SPOF - you can set up two load balancers though in an active-active paradigm, and either load balancer can receive
+packets from the application tier.  Additionally, the load balancers listen for each other, and if one dies, the other one makes sure that it is routing
+all traffic.  Active-passive is where a secondary load balancer is only listening for the first to die and promoting itself to the active load balancer
+
+So, ways you could use this active-active framework is via tier partitioning - you could set things up so your databases only handle information from
+certain sources (say Facebook being set up for both Harvard and MIT).  The drawback is that if you need to share data across partitions, you have a bit
+of a problem.  Partitioning does, however, let you balance load based on high level user information
+
+High availability - the paradigm in which a group of servers are monitoring each other and are prepared to take higher loads if one of the servers in
+the group dies
+
+So, finally:  Best options out of everything discussed.
+Sticky sessions: Load balancer inserting and reading cookies, sending user to correct server based on key in cookie
+Additionally - you can partition the server such that the user will end up sent to the same tier each time
+Connecting the servers to the db:  Master-Master and Master-Slave replication patterns - add in another load balancer between application tier
+and database tier
+Additional redundancy can be introduced via geolocation based load balancing (literally different buildings handling different request from the world)
+
+Security: What type of traffic should be allowed from the outside world into your server farm? TCP 80, TCP 443 (for SSL), TCP 22 (for SSH)
+If you terminate the SSL when the information hits the load balancer, because information is within the system, that might be ok.  
+Within the server farm, between the application tier and the database tier, you might want TCP 3306 for SQL queries
+So, why restrict traffic in the first place?  Generally, you don't want people to be able to execute things like SQL queries on your server farm 
+directly.  Leaving everything open more or less follows the principle of least privilege - people should only have _just_ enough permissions to do
+what they are supposed to.
 

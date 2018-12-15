@@ -1,0 +1,8 @@
+When does DNS load-balancing become necessary?
+When you have multiple machines in an application tier to handle requests
+
+What is the principle of Least Privilege and how does it relate to the responsibilities of the Load Balancer?
+The principle of least privilege is that you should gate access to any resource based on the minimum amount of privilege required to complete the task
+Essentially, don't allow access to things that are unnecessary.  The load balancer can use this to determine which ports it should be listening on to 
+serve requests.
+

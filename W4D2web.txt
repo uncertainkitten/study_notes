@@ -1,0 +1,10 @@
+How can you solve the sticky-session issue without shared file storage on the back-end?
+You can use cookies - make sure that they have a key that tells the load balancer which server it needs to direct the user to.  The downside is mostly
+that when you restructure anything, that unsticks the user's session
+
+Explain why you might want to compile and store static HTML pages for something like a Craigslist post.
+It's incredibly fast, you don't have processing overhead every time you serve up a static page - which allows caching to work
+
+What does using 'memcache' do for you?
+Runs on a server and caches things in RAM - useful to cache the results of expensive but common queries.  The downside is figuring out what to do
+if your cache runs out of space, which is where LRU cache comes in.

@@ -1,0 +1,11 @@
+Why would you want to use an LRU cache in a backend server?
+To keep your memcache fresh and make sure that the most frequently used queries are the ones getting cached
+
+In the Master-Slave paradigm, what tasks are commonly done by the slave databases and why?
+Slave databases are largely responsible for read tasks - applications that have a lot of read requests and fewer write requests benefit from
+this model
+
+In a multi-tiered architecture, how do we get redundancy and responsiveness?
+You can use Active-Active load balancer setups, and Master-Slave and Master-Master (or Leader-Follower Leader-Leader) set ups in order to handle
+failures automatically without human intervention.  This also increases responsiveness because setups like Leader-Leader and Active-Active make 
+your servers high availiability.
