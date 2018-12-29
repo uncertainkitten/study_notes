@@ -1,0 +1,230 @@
+Nth Fibonacci - pretty typical recursion problem
+Fibonacci seq - the next value is fib(n-1) + fib(n-2) for n > 2
+
+Programmatically:
+def fib(n):
+  if n == 2:
+    return 1
+  elif n == 1:
+    return 0
+  else:
+    return fib(n-1) + fib(n-2)
+
+The issue with this is we keep getting the same solution repeatedly, because the call stack ends up having a tree structure.  You end up having
+exponential time (O(2^n)). Space complexity is going to be O(n) - because the call stack is storing all unresolved calls
+
+So, you can also solve this with memoization - this becomes O(n) time, because we only calculate each fibonacci number once
+Space complexity is O(n)
+So instead, we do
+def fib_m(n):
+  if n in memoize:
+    return memoize[n]
+  else:
+    memoize[n] = fib(n-1) + fib(n-2)
+    return memoize[n]
+
+Lastly, we have the iterative solution
+You use a window - start an array with the previous 2 Fibonacci numbers
+while the counter is <= n, you just add the two numbers, swap the numbers, and put the new number in the second place in the array
+
+Full code:
+(Recursive, O(2^n))
+def fib(n):
+  if n == 2:
+    return 1
+  elif n == 1:
+    return 0
+  else:
+    return fib(n-1) + fib(n-2)
+
+(Recursive, O(n))
+def getNthFib(n, memoize = {1: 0, 2: 1}):
+  if n in memoize:
+    return memoize[n]
+  else:
+    memoize[n] = getNthFib(n - 1, memoize) + getNthFib(n - 2, memoize)
+
+(Iterative, O(n))
+getNthFib(n)
+  lastTwo = [0, 1]
+  counter = 3
+  while counter <= n:
+    nextFib = lastTwo[0] + lastTwo[1]
+    lastTwo[0] = lastTwo[1]
+    lastTwo[1] = nextFib
+    counter += 1
+  return lastTwo[1] if n > 1 else lastTwo[0]
+
+Permutations:
+How to think of permutations:
+Every permutation is going to start with one of the numbers in the array: i.e., if you have [1,2,3], you will have permutations starting with 1, 2, and 3
+And you can extend this essentially remove a number from the list, and add it to the permutations of the successive numbers
+And you can do that until you only have one number, which only has one permutation
+
+Pseudocode:
+Helper(arr, perm, perms):
+  if array isempty:
+    perms.append(perm)
+  else:
+    for num in arr:
+      newArr = RemoveNumFrom(arr)
+      newPerm = perm + num
+      helper(newArr, newPerm, perms)
+
+Note:  DO NOT MUTATE THE ARGUMENT, you will get incorrect values, because you need to pass up the information for the hypothetical arrays with each call
+Analysis: Removing from array is going to be O(n), and we are calling this operation o(n) times.  And each branch of the tree has n calls
+Therefore, we are making n^2*n! calls, so our time complexity is O(n^2 * n!)
+Space complexity is n * n! (because there are n! permutations)
+
+Now, there is a better solution - what if we don't need to create these new arrays each time?  How does that work?  Swap things in place to create
+new perms
+
+Set a pointer to each position: 
+[1,2,3]
+ ^ ^ ^
+Swap the first number with every number after it
+Then swap the second number with every number after it
+etc. etc., until you reach the last number
+
+helper(i, arr, perms):
+  if i is last position:
+    perms.append(copy of arr)
+  else:
+    for j from i to end of array:
+      swap(i, j)
+      helper(i+1, arr, perms)
+      swap(i, j)
+
+Analysis:  Space complexity is (O(n * n!))
+Time complexity is O(n * n!), because you are swapping at O(1) time
+
+Actual code:
+def getPermutations(array):
+  permutations = []
+  permutationsHelper(array, perm, permutations)
+  return permutations
+
+def permutationsHelper(array, currentPermutation, permutations):
+  if not len(array) and len(currentPermutation):
+    permutations.append(currentPermutation)
+  else:
+    for i in range(len(array)):
+      newArray = array[:i] + array[i + 1:]
+      newPermutation = currentPermutation + [array[i]]
+      permutationHelper(newArray, newPermutation, permutations)
+
+
+Better code:
+def getPermutations(array):
+  permutations = []
+  permutationsHelper(0, array, permutations)
+  return permutations
+
+def permutationsHelper(i, array, permutations):
+  if i == len(array) - 1
+    permutations.append(array[:])
+  else:
+    for j in range(i, len(array)):
+      swap(array, i, j)
+      permutationsHelper(i + 1, array, permutations)
+      swap(array, i, j)
+
+def swap(array, i, j):
+  array[i], array[j] = array[j], array[i]
+
+
+Steps for [1,2,3]
+So, let's run this through
+permutations = []
+permHelp(0, [1,2,3], [])
+for j in range(0, 3):
+  swap([1,2,3], 0, 0)
+  permHelp(1, [1,2,3], [])
+    for j in range(1, 3):
+    swap([1,2,3], 1, 1)
+    permHelp(2, [1,2,3], [])
+      2 == 3 - 1
+      permutations = [1, 2, 3]
+    Well I guess we're done because there was only 2
+  i = 1, j = 2
+  swap(2, 3) = [1,3,2]
+  permHelp(2, [1,3,2], [[1,2,3]])
+  2 == 3 - 1
+    permutations = [[1,3,2], [1,2,3]]
+    Well I guess we're done here
+i = 0, j = 1
+[2, 3, 1] swap
+permHelp(1, [2,3,1], [[1,3,2], [1,2,3]])
+  i = 1, j = 1
+  permHelp(2, [2, 3, 1], [[1,3,2], [1,2,3]])
+  2 == 3 - 1
+  add [2, 3, 1]
+  Well, I guess we're done here
+  i = 1, j = 2 swap [2, 1, 3]
+  permHelp(2, [2,1,3], perms)
+    2 == 3 - 1
+    [2, 1, 3]
+  Well I guess we're done here
+ I think I get it but I'm a little confused as to where the call for the last bit comes in
+
+Powersets:
+(Subsets - or the set of all subsets)
+Powerset([1,2,3]) = [[], [1], [2], [3], [1,2], [1,3], [2,3], [1,2,3]]
+
+Iterative solution:
+What can you put into your solution from the beginning?
+[[]]
+Then you can iterate through the numbers, and create subsets by adding that number to all subsets in the array
+So take 1:
+[[], [1]]
+[] << 1
+So take 2:
+[[], [1], [2], [1,2]]
+[] << 2
+[1] << 2
+So take 3:
+[[], [1], [2], [1,2], [3], [3,1], [3,2], [3,1,2]]
+[] << 3
+[1] << 3
+[2] << 3
+[1,2] << 3
+
+Space and time complexity: Think of it in terms of how many subsets you have at the end.  You have 2^n subsets, and therefore you have O(2^n * n) time -
+You are iterating through the subsets each time you iterate through the next number, and you have to append for each subset
+Space complexity is O(2^n * n)
+
+Actual code iterative:
+(O(n * 2^n)) time and space
+def powerset(array):
+  subsets = [[]]
+  for ele in array:
+    for i in range(len(subsets)):
+      currentSubset = subsets[i]
+      subsets.append(currentSubset + [ele])
+  return subsets
+
+Actual code recursive:
+def powerset(array, idx = None):
+  if idx is None:
+    idx = len(array) - 1
+  if idx < 0:
+    return [[]]
+  ele = array[idx]
+  subsets = powerset(array, idx - 1)
+  for i in range(len(subsets)):
+    currentSubset = subsets[i]
+    subsets.append(currentSubset + [ele])
+  return subsets
+
+Essentially, the recursive solution defines the subsets as "The subsets of the array with an element missing, plus the element added to each subset"
+
+
+
+
+
+
+
+
+
+
+

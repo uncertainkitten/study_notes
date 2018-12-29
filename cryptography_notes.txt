@@ -1,0 +1,91 @@
+Asymmetric encryption:
+Generate two keys, which can't be guessed from one another, but the keys can encode and decode the same things
+So if you generate a key pair like this, you have a public key that you publish for everyone, and then you have a private key which lets you
+have a public key that can encode something and a private key that can decode it (so if someone knows your public key, they can send you an encoded
+message you can decode, and you can reply using their public key)
+
+Additionally, you can _encode_ a message with your private key and people can decode with your public key, so that they know _for sure_ that the message
+is coming from you.
+
+SHA:
+Secure Hash Algorithm (tho it's been broken so)
+Basic idea of a hash function: Turns a string into a fixed length output
+So, invented by the NSA in 1995, more or less extends md5
+Generates a 160 bit string - how?  It does a loop that takes 512 bit blocks of data one at a time until the file is expended
+SHA1 - takes a message of n blocks of 512 bits in length - if it is exactly 1 block, then the hash is run once, and it outputs that string
+SHA1 - starts with an internal state, brings in bits of the message, changes the internal state, and then we read the internal state once its done
+Step by step:
+Call the internal state H:
+The internal state starts at 160 bits (5 32 bit words, 4 bytes each)
+So lets say we have H0, H1, H2, H3, H4, all representing one of the words
+Essentially we run a compression function (80 times), adding parts of the message into other parts of the message and increasing the appearance of
+randomness - however we need to make sure this hash function is still this specific message, not a general one.
+Once this is done, the new representations of the original message are added to the internal state
+SHA notably does not allow buffer overflow - it modulos results by 2 ^ 32 - this in turn makes the SHA hashing algo one way.
+It's fine that it's one way because we're operating on the representation.
+If the message if 512 bits, you're done
+If not, you keep copying the new internal state, running the function, and adding it to the next block until you run out blocks
+If it's not a multiple of 512 bits, you have to do some padding - this basically involves marking padding with a 1, adding a bunch of 0s, putting
+the message length at the end, and ending on a 1
+This entire structure is a Merkel Damgard Construction
+
+The issue with SHA1 is that there's not as much possibility space as it seems at first, so it can be cracked
+
+Messages/stream ciphers - message authentication codes:
+Usually messages are sent encrypted - this doesn't in fact protect from interception, alteration, or anything like that
+MAC - Message Authentication Code
+This creates a guarantee the message hasn't been changed
+Usually encrypting using a stream cipher or a block cipher
+To cipher - we start with plaintext, use a pseudorandom stream key (such as XOR), and then we send the flipped bits
+Usually, changing a bit will wreck the message for decryption - however, stream ciphers go bit by bit, so you can safely change a given bit
+maliciously
+So first - hash the message, add the hash to the end of the message - except this is crackable because you can change the message and recompute the hash
+So, you need a "shared secret" - something both you and the person you're communicating with, and tack _that_ hash at the end of your message
+The issue here is that, we can append to the message instead of adding to it, by guessing the length of the shared message (issue with Merkel Damgard constructions)
+So, the actual thing - This is the HMAC approach - this involves _two_ hashes, and doesn't fall prey to length extension attacks
+So you take key 1 and key 2, hash them, and then add the hashes together and hash those
+How do we derive the key?  Take two constants, XOR them with the key separately
+so internal pad and outer pad, and then we do the hash thing, and this I guess can change the length of the keys while still being separable
+
+Secret Key Exchange (Diffe Hellman):
+So the previous things assume we have a symmetric key and use it to talk securely.  So how do we get that secret key?  Diffe Hellman
+Diffe-Hellman is mathematically complex
+So we don't exchange keys directly - what we do is exchange public variables, combine them with some private variables, such that we can generate the
+same key
+
+So, let's see this:
+Alice|Public|Bob
+Before anything, Alice and Bob have to agree to mathematical parameters - g, for generator, and a large prime number n
+g and n are public - shared at the beginning of the handshake
+Privately - Alice has a private key (a) she's generated and keeps to herself.  Same with Bob (b)
+So first, we combine the private key with the generator - once they're combined, it's difficult to separate them (so we have ag and bg)
+Next, they exchange ag and bg (So Bob has ag, Alice has bg)
+After that, Alice adds her private key to bg, getting abg
+Bob adds his private key to ag, getting bag
+Multiplication is communative so now they both have the same key, but an attacker can't make this key from ag or bg
+
+Diffie-Hellman, the maths:
+g - a very small prime number
+n - a very large prime number
+Using a lot of modular arithmetic, what happens?
+n is usually 2000 to 4000 bits
+Alice picks a, Bob picks b
+a is between 1 and n, b is between 1 and n
+Alice - g^a % n
+Bob - g^b % n
+
+Alice gets Bob's g^b % n, and Bob gets Alice's g^a % n
+Then they put it to the power of their respective private variables, making both variables g^ab % n
+
+
+
+
+
+
+
+
+
+
+
+
+

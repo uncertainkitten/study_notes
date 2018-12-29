@@ -1,0 +1,74 @@
+So, what is a suffix tree/trie?
+
+Root node - represents empty string
+Essentially, from each letter, you go to the end of the string, and then tack a * at the end
+The idea is you want to be able to search the trie quickly for a given substring
+
+How to build:
+Hash tables :O
+Every node in the suffix tree will be a key pointing to another hash table, which is another node
+So, given example "babc"
+{b: {}}
+
+Storing b - check if it is in the tree, if not, add to tree
+So first: {b: {}}, current node b: {}
+Next letter a - check if it is in our current node (so we move with the node as we build)
+{b: {a: {}}}, current node, {a: {}}
+Next letter b - check if it is in our current node, and it is _not_ stored in teh current node
+{b: {a: {b: {}}}}, current: {b: {}}
+Next c, you know the drill
+{b: {a: {b: {c: {*}}}}, current: {c: {*}}
+Now, let's move to "abc", since we've finished "b"
+{b: {a: {b: {c: {*}}}, a: {}}, current: a: {}
+add b
+{b: {a: {b: {c: {*}}}, a: {b: {}}}
+add c
+{b: {a: {b: {c: {*}}}, a: {b: {c: {*}}}}
+Now, we DO have a b here, so we can add it to the b hash from the next letter
+{b: {a: {b: {c: {*}}, c: {*}}, a: {b: {c: {*}}}}
+And then c
+{b: {a: {b: {c: {*}}, c: {*}}, a: {b: {c: {*}}}, c: {*}}
+
+The main beauty of this structure is that you can reuse nodes, which saves trouble in terms of the build
+
+Searching for strings in suffix trees:
+You check each letter and ask "is this letter contained in this node", and look for it to terminate at *
+Now, note you don't want to count prefixes, _only_ suffixes
+Searching is O(M) time, where M is the searched for string's length
+Space is O(1) for search
+Creation is O(N^2) time, O(N^2) space - however, you can build a suffix tree in O(N) time using more complex algorithms
+
+How to actually build this out in Python:
+class SuffixTrie:
+  def __init__(self, string):
+    self.root = {}
+    self.endSymbol = "*"
+    self.populateSuffixTrieFrom(string)
+
+This is O(n^2) time and O(n^2) space
+  def populateSuffixTrieFrom(self, string):
+    for i in range(len(string)):
+      self.insertSubstringStartingAt(i, string)
+  
+  def insertSubstringStartingAt(self, i, string):
+    node = self.root
+    for j in range(i, len(string)):
+      letter = string[j]
+      if letter not in node:
+        node[letter] = {}
+      node = node[letter]
+    
+    node[self.endSymbol] = True
+
+This is O(m) time and O(1)) space
+  def contains(self, string):
+    node = self.root
+    for letter in string:
+      if letter not in node:
+        return False
+      
+      node = node[letter]
+    return self.endSymbol in node
+
+
+
