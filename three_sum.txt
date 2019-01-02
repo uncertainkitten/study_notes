@@ -1,0 +1,43 @@
+How do we solve three sum?  Three integers, all add up to a target sum, part of an array
+Given [12, 3, 1, 2, -6, 5, -8, 6] and target 0
+Solution is [[-8, 2, 6], [-8, 3, 5], [-6, 1, 5]]
+
+Naive solution: 3 for loops, obv
+Check each addition, see if it equals the target (O(n^3)) time
+
+The optimal solution:
+Sort the array, and then use pointers
+Sorted array: [-8, -6, 1, 2, 3, 5, 6, 12]
+
+Why did we do that?  We can get the answer in O(n^2)
+So we start at the beginning of the array, current number (-8)
+Then we take left number, which is going to be -6 rn
+And then right number, which is 12
+Current sum = current + left + right (-8 + -6 + 12), check against target ( false)
+If it were the target, then you just add [current, left, right] to your results array
+From there, we move the relevant pointer, based on whether our result is greater than or less than the target
+If less than target - move the left pointer (because next number is bigger)
+If greater than target - move the right pointer
+If it is equal to target - add it to the array of results, and _move both pointers_
+Note - if the integers are not distinct, then you can't move both immediately
+And when the pointers meet, go to the next current number - the left pointer goes to the one _after_ current as the start
+
+Implementing in code:
+Python
+def threeNumberSum(array, targetSum):
+  array.sort()
+  triplets = []
+  for i in range(len(array) - 2)
+    left = i + 1
+    right = len(array) - 1
+    while left < right:
+      currentSum = array[i] + array[left] + array[right]
+      if currentSum == targetSum:
+        triplets.append([array[i], array[left], array[right])
+        left += 1
+        right += 1
+      elif currentSum < targetSum:
+        left += 1
+      elif currentSum > targetSum:
+        right += 1
+  return triplets

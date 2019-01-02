@@ -1,0 +1,64 @@
+Given two arrays of different values, find a pair of numbers (one from each array) who's absolute difference is closest to zero
+
+So, given [-1, 5, 10, 20, 28, 3] and [26, 134, 135, 15, 17], output is [28, 26]
+
+Naive solution: Use two for loops, iterate through both arrays and find out all sums, and find the smallest
+Better solution: Start by sorting the arrays
+sorted_a = [-1, 3, 5, 10, 20, 28]
+sorted_b = [15, 17, 26, 134, 135]
+
+So, if you take two arbitrary numbers from the array, and they are equal, you return that pair
+Now, if arbitrary number from sorted_a is less than number form sorted_b, then we know that any number from sorted_a is going to be further from the
+number from sorted_b - additionally, any number greater then the number from sorted_b is going to be a greater distance from sorted_a number
+Thusly, either decrement sorted_b, or increment sorted_a
+
+So instead of arbitrary numbers, lets use two pointers at the beginning of each array
+So starting with -1 and 15
+We get a difference of 16, which is a potential answer
+So lets increment -1
+We get to 3.  The new difference is 12
+So we increment 3
+We get to 5.  The new difference is 10
+Now we increment 5
+We get to 10, new difference 5
+Now we increment 10
+We get to 20, new difference is still 5 - however, 20 is Greater Than 15
+Now we increment _15_
+We get to 17, new difference is 3
+Now we increment 17
+We get to 26, the new difference is 6, so we won't keep that, 26 is Greater than 20, so we go back to incrementing sorted_a
+Now we increment 20
+We get to 28, difference is 2 (26 is less than 28)
+Now we increment 26
+We get to 134, the difference is a lot, etc.
+When we reach the end, we take the pair with the best difference
+
+O(N(log(n)) + M(log(m)))
+
+Code solution:
+def smallestDifference(arrayOne, arrayTwo):
+  arrayOne.sort()
+  arrayTwo.sort()
+  idxOne = 0
+  idxTwo = 0
+  smallest = float("inf")
+  current = float("inf")
+  smallestPair = []
+  while idxOne < len(arrayOne) and idxTwo < len(arrayTwo):
+    firstNum = arrayOne[idxOne]
+    secondNum = arrayTwo[idxTwo]
+    if firstNum < secondNum:
+      current = secondNum - firstNum
+      idxOne += 1
+    elif secondNum < firstNum:
+      current = firstNum - secondNum
+      idxTwo += 1
+    else:
+      return [firstNum, secondNum]
+    if smallest > current:
+      smallest = current
+      smallestPair = [firstNum, secondNum]
+  return smallestPair
+
+
+
