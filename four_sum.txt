@@ -1,0 +1,52 @@
+So, let's say you have an array of numbers, and a target number, and you have to find quadruplets that add up to the target
+[7, 6, 4, -1, 1, 2], 16
+Output: [[7,6,4,-1], [7,6,1,2]]
+
+Naive solution:  What if we did _four_ for loops?  O(n^4)
+Well, here is the secret.  A quadruplet can be expressed as a pair of numbers, by summing two numbers and the other two numbers
+Given [x,y,z,k], you can make it P = (x+y) Q = (z+k)
+
+So essentially you can run two_sum twice if you do this right.
+
+So, in two_sum, we started with a hash table and mapped it to a boolean
+So what if instead, we mapped the number that is the sum of two numbers...to the pair of numbers making that number.
+i.e.
+{13: [7, 6], 11: [7, 4], etc.}
+
+But what happens if you have collisions?  Well this seems trivial to solve, you have an array of arrays, so you get [[4,2], [7,-1]]
+The last problem is that we might double count our quadruplets - we can get [7,6], [4,-1], [6,4], and [7,-1] which all are pairs that add up to 16
+but basically form the same quadruplet twice
+So the solution to that is that we have a single outer for loop, and two inner for loops strategically built to avoid double counting
+So the steps in concept:
+Iterate through the array once
+The loop within the loop checks if a sum we've calculated minus the target is in the hash table.  The first pass adds nothing to the hash.
+In the second pass, we go forward...and then we go _back_ to all numbers before the current number - and _then_ add that sum to the hash table
+Then we reach 4, iterate through, and find 4 + -1 is 3, and therefore 16 -3 is 13 and in the hash table, and add a quadruplet (iterate through all pairs
+in the value at the key)
+Then we add 11 to the hash table, with {11: [7,4]} (we also get {10: [6,4]})
+The convenient thing is that this _avoids double counting the 4_
+
+
+Average time complexity: O(n^2)
+Worst case complexity: O(n^3) (if you have a case where you get maximal pairs at one value)
+Space complexity: O(n^2) - number of quadruplets, hash table, and stores pairs
+
+def fourNumberSum(array, targetSum):
+  allPairSums = {}
+  quadruplets = []
+  for i in range(1, len(array) - 1):
+    for j in range(i + 1, len(array)):
+      currentSum = array[i] + array[j]
+      difference = targetSum - currentSum
+      if difference in allPairsSum:
+        for pair in allPairsSum[difference]:
+          quadruplets.append(pair + [array[i], array[j]])
+    for k in range(0, i):
+      currentSum = array[i] + array[k]
+      if currentSum not in allPairSums:
+        allPairSums[currentSum] = [[array[k], array[i]]]
+      else:
+        allPairSums[currentSum].append([array[k], array[i]])
+    return quadruplets
+
+
