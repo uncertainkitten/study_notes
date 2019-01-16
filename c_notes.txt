@@ -1,0 +1,8 @@
+C - invented by Ken Thompson and Dennis Ritchie
+
+Hello World in C:
+#include <stdio.h>
+int main(void){
+  printf("Hello world");
+  return 0;
+}
