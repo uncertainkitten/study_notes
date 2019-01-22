@@ -6,3 +6,26 @@ int main(void){
   printf("Hello world");
   return 0;
 }
+
+Printing newlines in C:
+#include <stdio.h>
+int main(void){
+    printf("Hello world!\n");
+    printf("Have fun with this course!");
+    return 0;
+}
+
+\ - begins an escape sequence
+\n - new line
+Note - you can do all this in one printf statement
+
+Printing quotation marks:
+#include <stdio.h>
+int main(void){
+    printf("Hello world!\n");
+    printf("Have fun with \"this\" course!");
+    return 0;
+}
+
+Use \ before the thing you want to escape and all is well
+
