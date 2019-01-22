@@ -29,3 +29,53 @@ int main(void){
 
 Use \ before the thing you want to escape and all is well
 
+For loops in C:
+#include <stdio.h>
+int main(void) {
+    int i = 0;
+    for(i=0; i<9; i++){
+        printf("Hello, world!\n");
+    }
+    return 0;
+}
+
+So define a variable, tell it how long to increment or decrement, and do your thing.
+Hey look it is literally basically JavaScript
+
+You can also run blocks of code in for loops (again, just like JavaScript, Ruby, whatever).  Do note that you can keep using the same fancy incrementing
+variable - I _assume_ that i is scoped to the loop it's associated with (alternatively, every time you do i=0 in the first part of the loop, you're
+resetting the value.  This would make more sense, probably.)
+
+Example:
+#include <stdio.h>
+int main(void) {
+    int i=0;
+    for(i = 0; i < 3; i++) {
+        printf("Blah");
+        printf("Bleh");
+        printf("Blih ");
+    }
+    printf("\n");
+    for (i=0; i<6; i++) {
+        printf("Bloh");
+        printf("Bluh ");
+    }
+    return 0;
+}
+
+Commenting
+You comment things with // on new line (again, just like Javascript)
+You can also comment code at end of line with // like usual - and you can also just comment out code so
+You can comment over multiple lines with /* */(just like CSS)
+And you can have comments in comments by combining // and /* */
+
+Structure of a C program
+#include <stdio.h> - preprocessor directive (code that runs before code is compiled)
+int main(void) - all programs need to have a "main" function, and can only have one main function
+int i = 0; - variable declaration
+executable statements (things like for loops, printfs, etc.)
+return - end of the function
+
+
+
+
