@@ -1,0 +1,27 @@
+The C Programming Language
+
+Data type: fundamental - characters, integers, and floating points
+Hierarchy of derived data types - pointers, arrays, structures, unions
+
+Expressions - formed from operators and operands
+Control flow constructions - fundamental:
+statement grouping, decision making (if-else), case statements (switch), loops at the top (while, for), loops at the bottom (do), early loop exit (break)
+
+Functions can return values of: basic types, structures, unions, or pointers
+Function definitions - cannot be nested, though variables may be declared in a block-structured fashion
+
+Variables can be scoped (internal to function, to all of source file, to entire program)
+
+Functions can be recursive, local variables are recreated with each invocation.
+
+Preprocessing step - peforms macro substitution on program text, inclusion of other source files, and conditional compilation.
+
+C does not have operations to deal directly with composite structures (strings, arrays, sets, lists) - structures are defined statically, no garbage
+collection or heap
+
+No in built file access in C.  C is single threaded.  No typecasting
+
+Chapter 1
+When you run a C program, it outputs a .out file - you run that .out file with ./$filename.out
+
+Breaking down Hello World - all C source files need to have a main(), though there may be other functions acting as helpers.
