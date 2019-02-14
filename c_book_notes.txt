@@ -93,6 +93,26 @@ Using long so that we get 32 bits rather than 16 for int storage
 You can also use double (double precision floating point) to get even more storage
 %.0f suppresses the decimal point, which would be 0 in this case.
 
+Note: EOF is Ctrl-D
+== is "is equal to" (duh)
+Writing a character in single quotes represents the character's "character constant" (the numerical value associated with a character)
+\n is a _single character
+' ' works for space
+
+Note - explore what your terminal is doing to \b inputs
+
+Variable assignment is handled from right to left (so nc = nw = nl = 0 sets everything to 0)
+|| is of course logical OR, && is logical AND
+&& is higher precedence than ||, and both operators are lazy
+
+Now let's get to the good stuff - C arrays:
+int ndigit[10] - declares ndigit to be an array of 10 integers
+Array subscripts are 0 indexed - and can be any integer expression
+The countstuff program relies on the fact that digits 0 through 9 are character represented in order and consecutively.  So in the character mapping,
+0, 1, 2, 3, 4, 5, 6, 7, 8, and 9 don't have anything in between them.
+
+Style - final else is omitted if the program doesn't do anything on an else condition
+
 
 
 
