@@ -25,3 +25,74 @@ Chapter 1
 When you run a C program, it outputs a .out file - you run that .out file with ./$filename.out
 
 Breaking down Hello World - all C source files need to have a main(), though there may be other functions acting as helpers.
+#include <stdio.h> - Tells the compiler to include the standard I/O library
+Use braces to enclose the function - in this case main takes no arguments so this is represented by ()
+printf never includes a newline automatically, hence \n
+Other escapes include - \t for tab, \b for backspace, \" for double quote, and \\ for backslash
+\a and \e do something kind of unclear
+\f seems to create an empty line under the text of length equal to the text
+\r didn't return anything, not even Hello World
+\u needs more information
+\v looks like \f?
+\x involves hex digits
+
+Temperature table
+Notes: Variables must be declared before they are used (declaration is type name and list of variable names), */ /* and // allow you to do comments
+C basic data types - int, float, char, short, long, double (short is short integer, long is long integer, double is double-precision float)
+Arrays, structures, and unions can be made out of these basic types
+You can also make pointers to the basic data types, and functions return basic data types
+
+Assignment statements - $variablename = value;
+While loops - condition in parens is tested - if true, execute the block of code.  If not true, the loop terminates.
+
+Note: Integer division truncates in C
+Scanf is for input, printf is for output - %d (and other % things) are format things
+
+Notes from v2 of temperature.c
+Putting a decimal in a constant designates it as a float (5.0, 9.0)
+If an operand has an integer and a floating point, the integer will be converted to float before processing.
+The format with 3.0 and 6.1 tells printf that a floating point number with 3 digits should be printed, and a floating point number with 6 digits, and one
+digit after the decimal point, should be printed
+
+printf also recognizes: %o for octal, %x for hexadecimal, %c for character, %s for string, and %% for % itself
+
+For loops:
+Three parts - initialization (fahr = 0), test condition (fahr <= 300), increment step (fahr += 20)
+
+Choice between while and for is largely dictated by which construction is clearer.
+
+Symbolic constants - it's bad practice to leave "magic numbers" like 300 and 20 in a program.  A way to deal with this is #define
+#define lets you set constants
+#define name replacement text
+
+#define statements do not end in semicolon, do not involve the assignment operator, and are usually uppercase to distinguish from variables
+
+Character input/output
+Text input and output is a stream of characters.  A text stream is a sequence of characters divided into lines - each line consists of 0 or more
+characters, followed by a new line.
+The library is responsible for for making each input or output stream conform to these rules.
+
+Standard library provides several functions for read/write one char at a time - getchar and putchar are the simplest
+
+getchar reads the next input character from a text stream and returns that as its value.  c = getchar() will have the next character from the stream
+as "c"'s value.  putchar prints a character every time it is called.  Putchar and printf can be interleaved - the functions will be read out in order.
+
+File copying
+Using getchar and putchar, you can copy input to output one character at a time.
+Note - this uses int instead of char (since all chars are bit patterns anyway) - c needs to be able to hold EOF, which is bigger than what the char
+data type can hold (so as to have EOF distinguish itself from any character)
+EOF is an integer defined by stdio.h
+
+You can improve the conciseness of the code by putting the variable assignment for c in the while loop test condition
+Note - the precedence of != is higher than that of =, so the variable assignment must be in parentheses so as to execute first - if you did not\
+use parentheses to shift the precedence, c would end up equivalent to 0 or 1 per returning the value of the test itself, not the getchar()
+
+Character counting
+++ is increment by one.
+Using long so that we get 32 bits rather than 16 for int storage
+You can also use double (double precision floating point) to get even more storage
+%.0f suppresses the decimal point, which would be 0 in this case.
+
+
+
+
